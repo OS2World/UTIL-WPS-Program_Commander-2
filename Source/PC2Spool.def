@@ -1,0 +1,13 @@
+LIBRARY     PC2SPOOL
+
+Description '$@#(C) Roman_Stangl@at.ibm.com:2.20 (12, 2000) (PC2SPOOL.dll)#@PC/2 - Program Commander/2'
+
+DATA        SINGLE SHARED
+STACKSIZE   65536
+HEAPSIZE    65535
+PROTMODE
+
+EXPORTS
+            _PC2SPOOLSIGNATURE      @1
+            SpoolerInitialize       @2
+

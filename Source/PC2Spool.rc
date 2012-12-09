@@ -1,0 +1,19 @@
+#include    <os2.h>
+#include    "PC2.h"
+
+ICON        ID_PC2SPOOLERWINDOW PRELOAD     Source\Resource\PC2.ico
+
+MENU        ID_SPOOLERPOPUPMENU PRELOAD
+BEGIN
+    MENUITEM    "~Refresh",                 ID_SPOOLERREFRESH,      MIS_TEXT
+    MENUITEM    SEPARATOR
+    MENUITEM    "~Hold job",                ID_SPOOLERHOLDJOB,      MIS_TEXT
+    MENUITEM    "~Release job",             ID_SPOOLERRELEASEJOB,   MIS_TEXT
+    MENUITEM    "~Delete job",              ID_SPOOLERDELETEJOB,    MIS_TEXT
+    MENUITEM    SEPARATOR
+    MENUITEM    "Hol~d queue",              ID_SPOOLERHOLDQUEUE,    MIS_TEXT
+    MENUITEM    "Re~lease queue",           ID_SPOOLERRELEASEQUEUE, MIS_TEXT
+    MENUITEM    SEPARATOR
+    MENUITEM    "~Help",                    ID_SPOOLERHELP,         MIS_TEXT
+END
+

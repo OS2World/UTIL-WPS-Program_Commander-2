@@ -1,0 +1,27 @@
+#include    "PC2.h"
+#include    "WPS2PC2.ih"
+#undef      Wps2Pc2                     /* WPS2PC2.h defines Wps2Pc2 being SOMAny,
+                                           which isn't acceptable here */
+
+ICON        ID_WPS2PC2MAINWINDOW PRELOAD    Source\Resource\Wps2Pc2.ico
+
+BITMAP      WPBM_STATUSBITMAP   PRELOAD     Source\Resource\Empty.bmp
+BITMAP      WPBM_EMPTY          PRELOAD     Source\Resource\Empty.bmp
+BITMAP      WPBM_FULL           PRELOAD     Source\Resource\Full.bmp
+
+MENU        ID_WPS2PC2OPENMENU  PRELOAD
+BEGIN
+    MENUITEM "~WPS 2 PC/2",                 ID_WPS2PC2OPEN
+END
+
+HELPTABLE       MAIN_HELP_TABLE PRELOAD
+BEGIN
+    HELPITEM    ID_PC2MAINWINDOW, MAIN_HELP_SUBTABLE, ID_HELP
+END
+
+HELPSUBTABLE    MAIN_HELP_SUBTABLE          PRELOAD
+BEGIN
+    HELPSUBITEM ID_WPS2PC2MAINWINDOW,       ID_WPS2PC2MAINWINDOW
+    HELPSUBITEM WPID_WPS2PC2DIALOG,         WPID_WPS2PC2DIALOG
+END
+

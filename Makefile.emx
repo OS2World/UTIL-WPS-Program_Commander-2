@@ -1,0 +1,181 @@
+#===================================================================
+#
+#   PC/2 - Program Commander/2 Makefile
+#
+#   Credits: Special thanks to Andrew Zabolotny for taking the 
+#            efforts to enhance the PC/2 2.00 Makefile to support
+#            GNU C additionally to IBM's compilers
+#
+#   Needs: GNU C version 2.7.2, version 2.8.0 (EGCS), pgcc
+#          GNU sed
+#          LINK386
+#
+#   Toolkit : IBM Developers Toolkit 2.1
+#             IBM Warp 3 Developers Toolkit
+#             IBM Warp 4 Developers Toolkit
+#
+#                 DevCon 12 and DevCon V2R1 versions
+#                 require in SOMOBJ.H to add:
+#                 typedef somInitCtrl som3InitCtrl;
+#                 typedef somAssignCtrl som3AssignCtrl;
+#                 typedef somDestructCtrl som3DestructCtrl;
+#                 probably due to compiler problem in SOMAPI.H
+#                 DevCon V2R2
+                  SOM emitter emitctm traps (even with Car sample)
+#
+#                 DevCon V2R1 RC.EXE corrupts executables
+#                 DevCon V2R1 SOM compiler has internal error
+#                             (Trapped segment) can't be used
+#                 DevCon V2R1 EXEHDR.EXE displays nonsense
+#
+#===================================================================
+
+ifndef SLOWVID
+VIDEO =
+else
+VIDEO = -DSLOWVIDEO
+endif # SLOWVID
+
+# Test for IBM Toolkit V2.1 or IBM Warp Toolkit V3.0 / V4.0
+
+ifdef IBMTLKT40
+TOOLKIT = -DIBMTLKT40
+endif # IBMTLKT40
+
+ifdef IBMTLKT30
+TOOLKIT = -DIBMTLKT30
+endif # IBMTLKT30
+
+ifdef IBMTLKT21
+TOOLKIT = -DIBMTLKT21
+endif # IBMTLKT21
+
+ifndef NODEBUG
+CFLAGS =    -c -g -Zomf -Zmt -Wall -O2 $(VIDEO) $(TOOLKIT)
+CFLAGSDLL = -c -g -Zomf -Zmt -Wall -O2 -Zdll $(VIDEO) $(TOOLKIT)
+else
+CFLAGS =    -c -s -Zomf -Zmt -Wall -O2 $(VIDEO) $(TOOLKIT)
+CFLAGSDLL = -c -s -Zomf -Zmt -Wall -O2 -Zdll $(VIDEO) $(TOOLKIT)
+endif # NODEBUG
+
+# LINK386 Flags
+#   /DEBUG  Include debug information for IPMD
+#   /NOE    NO Extented dictionary, don't assume any library dependencies
+#   /NOD    NO Default library, ignore the library names in object files
+#   /NOI    NO Ignore case
+#   /A:16   Align on paragraph for PM programs
+#   /MAP    Produce map
+#   /E      Exepack to compress pages within the executable
+#   /F      Farcalltranslation to optimize far calls by avoiding selector reloads
+#   /PACKC  Overwrite Packcode default of 65530 to 0x40000
+
+ifndef NODEBUG
+LFLAGS = /DEBUG /NOE /NOD /ALIGN:8 /MAP /NOI /E /F /PACKC:0x40000
+LFLAGR = /ALIGN:1 /MAP
+else
+LFLAGS = /NOE /NOD /ALIGN:8 /MAP /NOI /E /F /PACKC:0x40000
+LFLAGR = /ALIGN:1 /MAP
+endif # NODEBUG
+
+# MicroSoft MASM 6.0 Flags
+#   /c      Compile only, we link more than one ressource
+#   /Cx     Preserve case in publics, externs
+#   /Cp     Preserve case of user identifiers
+#   /Fl     Generate listings
+
+ifndef NODEBUG
+MFLAGS = /c /Cx /Cp /Zd /Zi
+else
+MFLAGS = /c /Cx /Cp
+endif # NODEBUG
+
+# Directories
+# \.        Executables, help panels, DLLs, documentation, profiles
+# \Source   Source, object modules, headers
+SRC=Source
+
+# SC Flags
+# For the SOM compiler, the following environment variables are assumed
+# to be set for the IBM OS/2 Developer's Toolkit 2.1:
+#
+# SET SMINCLUDE=.;x:\TOOLKT21\SC;
+# SET SMTMP=x:\
+# SET SMEMIT=ih;h;ph;psc;sc;c;def
+# SOM 1 (Toolkit 2.1)
+#   -v          Verbose mode
+#   -r          Check that release order entries exist
+#   -d          Output directory of emitted file
+#
+# SOM 2 (Toolkit 3.0 / 4.0)
+#   Note: The path .;.\Source; must be included in the INCLUDE path
+#   -maddstar   add * to C bindings for interface references
+#   -mnoint     don't warn about "int" causing portability problems
+#   -S128000    size of string buffer (default 49152)
+#   -C128000    size of comment buffer (default 59152)
+#   -v          verbose debugging move
+#   -p          shorthand for -D__PRIVATE__
+#   -s c        replace SMEMIT variable with <string> (creates *.C file)
+#   -s def      replace SMEMIT variable with <string> (creates *.DEF file)
+#
+# For the SOM compiler, the following environment variables are assumed
+# to be set for the IBM OS/2 Warp Developer's Toolkit 3.0 / 4.0:
+#
+# SET SMINCLUDE=.;x:\TOOLKT30\IDL;x:\TOOLKT30\SOM\INCLUDE;
+# SET SMTMP=x:\
+# SET SMEMIT=ih;h;c;def
+# SET SMADDSTAR=1
+# SET SMNOTC=1
+#
+# Ensure that INCLUDE and SMINCLUDE do NOT contain the path to the
+# compiler SOM header files, if using the toolkit SOM
+
+ifdef IBMTLKT40
+SCFLAGS = -maddstar -mnoint -S128000 -C128000 -v -p
+SCFLAGS1 = -maddstar -mnoint -S128000 -C128000 -v -p -s c
+SCFLAGS2 = -maddstar -mnoint -S128000 -C128000 -v -p -s def
+RCFLAGS = -x1 -n -I $(SRC)
+SOMLIB = SOMTK
+endif # IBMTLKT40
+
+ifdef IBMTLKT30
+SCFLAGS = -maddstar -mnoint -S128000 -C128000 -v -p
+SCFLAGS1 = -maddstar -mnoint -S128000 -C128000 -v -p -s c
+SCFLAGS2 = -maddstar -mnoint -S128000 -C128000 -v -p -s def
+RCFLAGS = -x1 -n -I $(SRC)
+SOMLIB = SOMTK
+endif # IBMTLKT30
+
+ifdef IBMTLKT21
+SCFLAGS = -v -r -d $(SRC)
+RCFLAGS = -x -I $(SRC)
+SOMLIB = SOM
+endif # IBMTLKT21
+
+GCC = 1
+CC = gcc $(CFLAGS)
+SC = sc $(SCFLAGS)
+SC1 = sc $(SCFLAGS1)
+SC2 = sc $(SCFLAGS2)
+CCDLL = gcc $(CFLAGSDLL)
+ASM = ml $(MFLAGS)
+RC = rc $(RCFLAGS)
+LINK =    gcc -s -Zcrtdll -Zomf -Zmt
+LINKDLL = gcc -s -Zcrtdll -Zomf -Zmt -Zdll
+
+# Chain to 'all' target
+default: $(SRC)\Printf.obj all
+
+# Provide some rules to pre-process 'makerules' file
+Makerules.emx: Makerules Makefile.emx
+	sed -e "s|^!||" -e "s|/Fo|-o |" -e "s|^  *|	|" $< >$@
+
+$(SRC)\Printf.obj:
+	echo. >empty.c
+	$(CC) -o $@ empty.c
+	del empty.c
+
+#===================================================================
+# Now include the actual build process
+#===================================================================
+
+include Makerules.emx

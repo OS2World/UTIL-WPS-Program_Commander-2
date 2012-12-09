@@ -1,0 +1,14 @@
+LIBRARY     PC2NET
+
+Description '$@#(C) Roman_Stangl@at.ibm.com:2.20 (12, 2000) (PC2NET.dll)#@PC/2 - Program Commander/2'
+
+DATA        SINGLE SHARED
+STACKSIZE   65536
+HEAPSIZE    65535
+PROTMODE
+
+EXPORTS
+            _PC2NETSIGNATURE        @1
+            NetworkInterface        @2
+            StatusWindowProc        @3
+

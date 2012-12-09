@@ -1,0 +1,4 @@
+#include    <os2.h>
+#include    "PC2.h"
+
+rcinclude PC2Dlg.dlg

@@ -1,0 +1,20 @@
+LIBRARY     PC2HOOK
+
+Description '$@#(C) Roman_Stangl@at.ibm.com:2.20 (12, 2000) (PC2HOOK.dll)#@PC/2 - Program Commander/2'
+
+DATA        SINGLE SHARED
+STACKSIZE   65536
+HEAPSIZE    65535
+PROTMODE
+
+EXPORTS
+            _PC2HOOKSIGNATURE       @1
+            PC2DLL_Initialize       @2
+            PC2DLL_Cleanup          @3
+            PC2DLL_InputHook        @4
+            PC2DLL_PreAccelHook     @5
+            PC2DLL_WinSendMsgHook   @6
+
+            HookParameters          @10
+            KeyData                 @11
+

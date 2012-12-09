@@ -1,0 +1,250 @@
+#===================================================================
+#
+#   PC/2 - Program Commander/2 Makefile Rules
+#
+#   These are (almost) MAKE-independent and compiler-independent
+#   rules for building PC2 and associated files
+#
+#===================================================================
+
+BLDLEVEL = BuildLevel.cmd
+
+HEADERS = $(SRC)\PC2.h $(SRC)\Error.h
+
+ALL_OBJ = $(SRC)\PC2.obj $(SRC)\Switch.obj $(SRC)\Dialog.obj $(SRC)\Utility.obj $(SRC)\Error.obj $(SRC)\Thread.obj $(SRC)\Except.obj
+
+all: PC2.exe PC2.hlp PC2Hook.dll PC2Spool.dll PC2Net.dll PC2BRes.dll PC2VRes.dll WPS2PC2.dll WPS2PC2.hlp 
+
+clean:
+        -@del *.exe
+        -@del *.hlp
+        -@attrib +r $(SRC)\printf.obj
+        -@del $(SRC)\*.obj
+        -@del $(SRC)\*.res
+        -@del $(SRC)\*.map
+        -@del $(SRC)\*.ipf
+        -@del $(SRC)\*.l
+        -@del $(SRC)\WPS2PC2.?h
+        -@del $(SRC)\WPS2PC2.psc
+        -@del $(SRC)\WPS2PC2.sc
+        -@attrib -r $(SRC)\printf.obj
+
+save:
+        -!del PC2-Save.zip
+        zip -9 -r PC2 *
+        unzip -t PC2
+        copy PC2.zip PC2-Save.zip /v
+
+$(SRC)\Switch.obj: $(SRC)\Switch.c $(HEADERS)
+        $(CC) /Fo$(SRC)\Switch.obj $(SRC)\Switch.c
+
+$(SRC)\Dialog.obj: $(SRC)\Dialog.c $(HEADERS)
+        $(CC) /Fo$(SRC)\Dialog.obj $(SRC)\Dialog.c
+
+$(SRC)\Utility.obj: $(SRC)\Utility.c $(HEADERS)
+        $(CC) /Fo$(SRC)\Utility.obj $(SRC)\Utility.c
+
+$(SRC)\Thread.obj: $(SRC)\Thread.c $(HEADERS)
+        $(CC) /Fo$(SRC)\Thread.obj $(SRC)\Thread.c
+
+$(SRC)\Except.obj: $(SRC)\Except.c $(HEADERS)
+        $(CC) /Fo$(SRC)\Except.obj $(SRC)\Except.c
+
+$(SRC)\Error.obj: $(SRC)\Error.c $(SRC)\Error.h
+        $(CC) /Fo$(SRC)\Error.obj $(SRC)\Error.c
+
+$(SRC)\PC2.obj: $(SRC)\PC2.c $(HEADERS)
+        $(CC) /Fo$(SRC)\PC2.obj $(SRC)\PC2.c
+
+!ifdef IBMTLKT40
+$(SRC)\WPS2PC2.c: $(SRC)\WPS2PC2.idl $(HEADERS)
+        $(SC) $(SRC)\WPS2PC2.idl
+        $(SC1) $(SRC)\WPS2PC2.idl
+        $(SC2) $(SRC)\WPS2PC2.idl
+
+$(SRC)\WPS2PC2.ih: $(SRC)\WPS2PC2.idl $(HEADERS)
+        $(SC) $(SRC)\WPS2PC2.idl
+        $(SC1) $(SRC)\WPS2PC2.idl
+        $(SC2) $(SRC)\WPS2PC2.idl
+!endif # IBMTLKT40
+
+!ifdef IBMTLKT30
+$(SRC)\WPS2PC2.c: $(SRC)\WPS2PC2.idl $(HEADERS)
+        $(SC) $(SRC)\WPS2PC2.idl
+        $(SC1) $(SRC)\WPS2PC2.idl
+        $(SC2) $(SRC)\WPS2PC2.idl
+
+$(SRC)\WPS2PC2.ih: $(SRC)\WPS2PC2.idl $(HEADERS)
+        $(SC) $(SRC)\WPS2PC2.idl
+        $(SC1) $(SRC)\WPS2PC2.idl
+        $(SC2) $(SRC)\WPS2PC2.idl
+!endif # IBMTLKT30
+
+!ifdef IBMTLKT21
+$(SRC)\WPS2PC2.c: $(SRC)\WPS2PC2.csc $(HEADERS)
+        $(SC) $(SRC)\WPS2PC2.csc
+
+$(SRC)\WPS2PC2.ih: $(SRC)\WPS2PC2.csc $(HEADERS)
+        $(SC) $(SRC)\WPS2PC2.csc
+!endif # IBMTLKT21
+
+$(SRC)\WPS2PC2.obj: $(SRC)\WPS2PC2.c $(SRC)\WPS2PC2.h $(SRC)\WPS2PC2.ih $(HEADERS)
+        $(CCDLL) /Fo$(SRC)\WPS2PC2.obj $(SRC)\WPS2PC2.c
+
+PC2.hlp: $(SRC)\PC2.ipp PC2.doc # PC2-1.faq PC2-2.faq PC2-3.faq
+        ipfcprep $(SRC)\PC2.ipp $(SRC)\PC2.ipf /N /D IPFC
+        ipfc $(SRC)\PC2.ipf
+        copy $(SRC)\PC2.hlp PC2.hlp >NUL
+        del $(SRC)\PC2.hlp >NUL
+
+$(SRC)\PC2.l: Makefile
+        echo $(ALL_OBJ) $(SRC)\Printf.obj           > $(SRC)\PC2.l
+        echo PC2.exe                                >> $(SRC)\PC2.l
+        echo $(SRC)\PC2.map                         >> $(SRC)\PC2.l
+        echo $(LIBS)                                >> $(SRC)\PC2.l
+        echo $(SRC)\PC2.def                         >> $(SRC)\PC2.l
+$(SRC)\PC2Hook.l: Makefile
+        echo $(SRC)\PC2Hook.obj                     > $(SRC)\PC2Hook.l
+        echo PC2Hook.dll                            >> $(SRC)\PC2Hook.l
+        echo $(SRC)\PC2Hook.map                     >> $(SRC)\PC2Hook.l
+        echo $(LIBSS)                               >> $(SRC)\PC2Hook.l
+        echo $(SRC)\PC2Hook.def                     >> $(SRC)\PC2Hook.l
+$(SRC)\PC2BRes.l: Makefile
+        echo $(SRC)\Resource.obj                    > $(SRC)\PC2BRes.l
+        echo PC2BRes.dll                            >> $(SRC)\PC2BRes.l
+        echo $(SRC)\PC2BRes.map                     >> $(SRC)\PC2BRes.l
+        echo $(LIBSS)                               >> $(SRC)\PC2BRes.l
+        echo $(SRC)\PC2BRes.def                     >> $(SRC)\PC2BRes.l
+$(SRC)\PC2VRes.l: Makefile
+        echo $(SRC)\Resource.obj                    > $(SRC)\PC2VRes.l
+        echo PC2VRes.dll                            >> $(SRC)\PC2VRes.l
+        echo $(SRC)\PC2VRes.map                     >> $(SRC)\PC2VRes.l
+        echo $(LIBSS)                               >> $(SRC)\PC2VRes.l
+        echo $(SRC)\PC2VRes.def                     >> $(SRC)\PC2VRes.l
+$(SRC)\PC2Spool.l: Makefile
+        echo $(SRC)\PC2Spool.obj                    > $(SRC)\PC2Spool.l
+        echo PC2Spool.dll                           >> $(SRC)\PC2Spool.l
+        echo $(SRC)\PC2Spool.map                    >> $(SRC)\PC2Spool.l
+        echo $(LIBSS)                               >> $(SRC)\PC2Spool.l
+        echo $(SRC)\PC2Spool.def                    >> $(SRC)\PC2Spool.l
+$(SRC)\PC2Net.l: Makefile
+        echo $(SRC)\PC2Net.obj $(SRC)\Printf.obj    > $(SRC)\PC2Net.l
+        echo PC2Net.dll                             >> $(SRC)\PC2Net.l
+        echo $(SRC)\PC2Net.map                      >> $(SRC)\PC2Net.l
+        echo $(LIBSS) + $(LIBTCP)                   >> $(SRC)\PC2Net.l
+        echo $(SRC)\PC2Net.def                      >> $(SRC)\PC2Net.l
+$(SRC)\WPS2PC2.l: Makefile
+        echo $(SRC)\WPS2PC2.obj $(SRC)\Printf.obj   > $(SRC)\WPS2PC2.l
+        echo WPS2PC2.dll                            >> $(SRC)\WPS2PC2.l
+        echo $(SRC)\WPS2PC2.map                     >> $(SRC)\WPS2PC2.l
+        echo $(LIBSS) + $(SOMLIB)                   >> $(SRC)\WPS2PC2.l
+        echo $(SRC)\WPS2PC2.def                     >> $(SRC)\WPS2PC2.l
+
+$(SRC)\PC2.res: $(SRC)\PC2.rc $(SRC)\PC2res.h $(SRC)\PC2Dlg.dlg
+        $(RC) -r $(SRC)\PC2.rc $(SRC)\PC2.res
+        $(RC) -r $(SRC)\PC2Dlg.rc $(SRC)\PC2Dlg.res
+
+$(SRC)\PC2Spool.res: $(SRC)\PC2Spool.rc $(SRC)\PC2res.h
+        $(RC) -r $(SRC)\PC2Spool.rc $(SRC)\PC2Spool.res
+
+$(SRC)\WPS2PC2.res: $(SRC)\WPS2PC2.rc $(SRC)\PC2res.h
+        $(RC) -r $(SRC)\WPS2PC2.rc $(SRC)\WPS2PC2.res
+
+$(SRC)\PC2Hook.obj: $(SRC)\PC2Hook.c $(HEADERS)
+        $(CCDLL) /Fo$(SRC)\PC2Hook.obj $(SRC)\PC2Hook.c
+
+PC2Hook.dll: $(SRC)\PC2Hook.obj $(SRC)\PC2Hook.def $(SRC)\PC2Hook.l
+        $(BLDLEVEL) $(SRC)\PC2Hook.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINKDLL) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINK) @Source\PC2Hook.l
+!endif # GCC
+
+$(SRC)\PC2Spool.obj: $(SRC)\PC2Spool.c $(HEADERS)
+        $(CCDLL) /Fo$(SRC)\PC2Spool.obj $(SRC)\PC2Spool.c
+
+PC2Spool.dll: $(SRC)\PC2Spool.obj $(SRC)\PC2Spool.def $(SRC)\PC2Spool.l $(SRC)\PC2Spool.res
+        $(BLDLEVEL) $(SRC)\PC2Spool.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINKDLL) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINK) @Source\PC2Spool.l
+        $(RC) $(SRC)\PC2Spool.res PC2Spool.dll
+!endif # GCC
+
+$(SRC)\PC2Net.obj: $(SRC)\PC2Net.c $(HEADERS)
+        $(CCDLL) /DTCPV40HDRS /Fo$(SRC)\PC2Net.obj $(SRC)\PC2Net.c
+
+PC2Net.dll: $(SRC)\PC2Net.obj $(SRC)\PC2Net.def $(SRC)\PC2Net.l
+        $(BLDLEVEL) $(SRC)\PC2Net.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINKDLL) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINK) @Source\PC2Net.l
+!endif # GCC
+
+$(SRC)\Resource.obj: $(SRC)\Resource.c $(HEADERS)
+        $(CCDLL) /Fo$(SRC)\Resource.obj $(SRC)\Resource.c
+
+$(SRC)\PC2BRes.res: $(SRC)\PC2BRes.rc $(SRC)\PC2Dlg.dlg $(SRC)\PC2Dlg.res $(SRC)\PC2res.h
+!ifdef  WARP3
+        copy $(SRC)\Resource\Warp\* $(SRC)\Resource\ >NUL
+!endif # WARP3
+!ifdef  WARP4
+        copy $(SRC)\Resource\Merlin\* $(SRC)\Resource\ >NUL
+!endif # WARP4
+        $(RC) -r $(SRC)\PC2BRes.rc $(SRC)\PC2BRes.res
+
+PC2BRes.dll: $(SRC)\Resource.obj $(SRC)\PC2BRes.def $(SRC)\PC2BRes.l $(SRC)\PC2BRes.res
+        $(BLDLEVEL) $(SRC)\PC2BRes.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINKDLL) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINKRES) @Source\PC2BRes.l
+        $(RC) $(SRC)\PC2BRes.res PC2BRes.dll
+!endif # GCC
+
+$(SRC)\PC2VRes.res: $(SRC)\PC2VRes.rc $(SRC)\PC2Dlg.dlg $(SRC)\PC2res.h
+!ifdef  WARP3
+        copy $(SRC)\Resource\Warp\* $(SRC)\Resource\ >NUL
+!endif # WARP3
+!ifdef  WARP4
+        copy $(SRC)\Resource\Merlin\* $(SRC)\Resource\ >NUL
+!endif # WARP4
+        $(RC) -r $(SRC)\PC2VRes.rc $(SRC)\PC2VRes.res
+
+PC2VRes.dll: $(SRC)\Resource.obj $(SRC)\PC2VRes.def $(SRC)\PC2VRes.l $(SRC)\PC2VRes.res
+        $(BLDLEVEL) $(SRC)\PC2VRes.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINKDLL) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINKRES) @Source\PC2VRes.l
+        $(RC) $(SRC)\PC2VRes.res PC2VRes.dll
+!endif # GCC
+
+WPS2PC2.dll: $(SRC)\WPS2PC2.obj $(SRC)\WPS2PC2.def $(SRC)\WPS2PC2.l $(SRC)\WPS2PC2.res
+        $(BLDLEVEL) $(SRC)\WPS2PC2.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINKDLL) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINK) @Source\WPS2PC2.l
+        $(RC) $(SRC)\WPS2PC2.res WPS2PC2.dll
+!endif # GCC
+
+WPS2PC2.hlp: $(SRC)\WPS2PC2.ipp
+        ipfcprep $(SRC)\WPS2PC2.ipp $(SRC)\WPS2PC2.ipf /D IPFC
+        ipfc $(SRC)\WPS2PC2.ipf
+        copy $(SRC)\WPS2PC2.hlp WPS2PC2.hlp >NUL
+        del $(SRC)\WPS2PC2.hlp >NUL
+
+PC2.exe: $(ALL_OBJ) $(SRC)\PC2.def $(SRC)\PC2.l $(SRC)\PC2.res
+        $(BLDLEVEL) $(SRC)\PC2.def $(SRC)\PC2.h
+!ifdef GCC
+        $(LINK) -o $@ $(filter-out %.l,$^)
+!else
+        $(LINK) /BASE:0x00010000 @Source\PC2.l
+        $(RC) $(SRC)\PC2.res PC2.exe
+!endif # GCC
+
+

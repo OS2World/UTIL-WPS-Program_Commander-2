@@ -1,0 +1,9 @@
+LIBRARY     PC2VRES
+
+Description '$@#(C) Roman_Stangl@at.ibm.com:2.20 (12, 2000) (PC2VRES.dll)#@PC/2 - Program Commander/2'
+
+PROTMODE
+
+EXPORTS
+            _PC2RESSIGNATURE        @1
+

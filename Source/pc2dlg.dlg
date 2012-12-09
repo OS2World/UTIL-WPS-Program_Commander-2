@@ -1,0 +1,1073 @@
+#ifndef OS2_INCLUDED
+   #include <os2.h>
+#endif
+DLGINCLUDE 1 "H:\programming\pc2\source\PC2res.h"
+
+DLGTEMPLATE SEID_STARTUPDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Startup Environment Spaces)", 
+            SEID_STARTUPDIALOG, -22, -10, 294, 103, NOT FS_DLGBORDER | 
+            FS_BORDER | FS_MOUSEALIGN | WS_VISIBLE, FCF_TITLEBAR | 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Startup Environment Spaces", -1, 3, 20, 289, 81, 
+                        NOT WS_GROUP
+        LTEXT           "Application to be started:", -1, 9, 85, 122, 8, NOT 
+                        WS_GROUP
+        LTEXT           "", SETF_STARTUPPROGRAM, 132, 85, 155, 8, NOT 
+                        WS_GROUP
+        LISTBOX         SELB_ENVIRONMENTS, 8, 25, 277, 58, LS_MULTIPLESEL | 
+                        LS_HORZSCROLL | WS_GROUP
+        DEFPUSHBUTTON   "~Selected", DID_OK, 3, 3, 50, 14, WS_GROUP
+        PUSHBUTTON      "~Default", DID_CANCEL, 123, 3, 50, 14
+        PUSHBUTTON      "~Help", DID_HELP, 242, 3, 50, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE SUID_STARTUPDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Startup Parameters)", 
+            SUID_STARTUPDIALOG, -25, -10, 294, 97, NOT FS_DLGBORDER | 
+            FS_BORDER | FS_MOUSEALIGN | WS_VISIBLE, FCF_TITLEBAR | 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Commandline Parameters", -1, 3, 20, 289, 76, NOT 
+                        WS_GROUP
+        GROUPBOX        "", -1, 8, 65, 279, 26, NOT WS_GROUP
+        LTEXT           "Application to be started:", -1, 13, 76, 122, 8, 
+                        NOT WS_GROUP
+        LTEXT           "", SUTF_STARTUPPROGRAM, 136, 76, 145, 8, NOT 
+                        WS_GROUP
+        LTEXT           "Current startup parameters:", -1, 13, 68, 122, 8, 
+                        NOT WS_GROUP
+        LTEXT           "", SUTF_STARTUPPARAMETERS, 136, 68, 145, 8, NOT 
+                        WS_GROUP
+        GROUPBOX        "", -1, 8, 24, 279, 42, NOT WS_GROUP
+        LTEXT           "Parameter Information:", -1, 13, 51, 122, 8, NOT 
+                        WS_GROUP
+        LTEXT           "", SUTF_STARTUPINFO, 136, 51, 145, 8, NOT WS_GROUP
+        LTEXT           "User added parameters:", -1, 13, 43, 122, 8, NOT 
+                        WS_GROUP
+        ENTRYFIELD      "", SUEF_STARTUPPARAMETERS, 15, 31, 206, 8, 
+                        ES_MARGIN | WS_GROUP
+        PUSHBUTTON      "~Find File(s)", SUPB_FILE, 226, 28, 57, 14, 
+                        WS_GROUP
+        DEFPUSHBUTTON   "~Accept", DID_OK, 3, 3, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 128, 3, 40, 14
+        PUSHBUTTON      "~Help", DID_HELP, 252, 3, 40, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE MIID_PAGE1 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MIID_PAGE1, 12, -18, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Submenu Data", MIGRP_MENU, 3, 123, 209, 37, NOT 
+                        WS_GROUP
+        LTEXT           "Submenu Title:", -1, 8, 142, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", MIEF_MENUTITLE, 79, 142, 126, 8, ES_MARGIN
+        LTEXT           "Icon File:", -1, 8, 130, 65, 8
+        ENTRYFIELD      "", MIEF_ICONFILE, 79, 130, 126, 8, ES_MARGIN
+    END
+END
+
+DLGTEMPLATE MIID_MENUDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Menu Installation)", 
+            MIID_MENUDIALOG, 49, -7, 316, 215, WS_VISIBLE, FCF_TITLEBAR | 
+            FCF_NOBYTEALIGN
+    BEGIN
+        DEFPUSHBUTTON   "~Ok", DID_OK, 4, 3, 43, 14
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 136, 3, 43, 14
+        PUSHBUTTON      "~Help", DID_HELP, 268, 3, 43, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE LDID_PASSWORDDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Password)", LDID_PASSWORDDIALOG, 
+            -21, -10, 210, 60, FS_MOUSEALIGN | WS_VISIBLE, FCF_TITLEBAR | 
+            FCF_NOBYTEALIGN
+    BEGIN
+        LTEXT           "Access Password:", -1, 3, 47, 115, 8
+        ENTRYFIELD      "", LDEF_LOCKUPPASSWORD, 139, 47, 66, 8, ES_MARGIN | 
+                        ES_UNREADABLE
+        LTEXT           "", LDST_INVALIDPASSWORD, 3, 19, 187, 24, 
+                        DT_WORDBREAK | NOT WS_GROUP | NOT WS_VISIBLE
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+        DEFPUSHBUTTON   "~Ok", DID_OK, 3, 2, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 85, 2, 40, 14
+        PUSHBUTTON      "~Help", DID_HELP, 167, 2, 40, 14, BS_HELP | 
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE SDID_SHUTDOWNDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (ShutDown/PowerDown OS/2)", 
+            SDID_SHUTDOWNDIALOG, 0, 96, 264, 34, FS_SYSMODAL | NOT 
+            FS_DLGBORDER | FS_BORDER | WS_VISIBLE, FCF_TITLEBAR
+    BEGIN
+        CTEXT           "All disk activity will be suspended. After all disk"
+                        " activity has been stopped it is safe to power off "
+                        "or reset your sytem", SDID_SHUTDOWNMESSAGE, 5, 4, 
+                        254, 24, DT_WORDBREAK | NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF1414L
+    END
+END
+
+DLGTEMPLATE LDID_LOCKUPDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Lockup)", LDID_LOCKUPDIALOG, -21, 
+            -9, 210, 144, FS_SYSMODAL | FS_MOUSEALIGN | WS_VISIBLE, 
+            FCF_TITLEBAR | FCF_NOBYTEALIGN
+    BEGIN
+        LTEXT           "Password to unlock OS/2:", -1, 3, 47, 115, 8
+        ENTRYFIELD      "", LDEF_LOCKUPPASSWORD, 139, 47, 66, 8, ES_MARGIN | 
+                        ES_UNREADABLE
+        LTEXT           "", LDST_INVALIDPASSWORD, 3, 19, 187, 24, 
+                        DT_WORDBREAK | NOT WS_GROUP | NOT WS_VISIBLE
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+        DEFPUSHBUTTON   "~Ok", DID_OK, 3, 2, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 85, 2, 40, 14, NOT WS_VISIBLE
+        PUSHBUTTON      "~Help", DID_HELP, 167, 2, 40, 14, BS_HELP | 
+                        BS_NOPOINTERFOCUS
+        GROUPBOX        "Post a notice:", -1, 3, 60, 204, 82
+        MLE             "", LDMLE_POSTIT, 8, 65, 194, 68, MLS_WORDWRAP | 
+                        MLS_HSCROLL | MLS_VSCROLL | WS_GROUP | NOT 
+                        WS_VISIBLE
+        LTEXT           "Message from:", LDST_USER, 8, 123, 65, 8
+        ENTRYFIELD      "", LDEF_USER, 72, 123, 128, 8, ES_MARGIN | WS_GROUP
+        MLE             "", LDMLE_MESSAGE, 8, 80, 194, 39, MLS_WORDWRAP | 
+                        MLS_VSCROLL | MLS_IGNORETAB
+        PUSHBUTTON      "~Post It!", LDPB_POSTIT, 8, 64, 50, 14
+    END
+END
+
+DLGTEMPLATE RDID_RESORTDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Resort)", RDID_RESORTDIALOG, 8, 8, 
+            284, 116, NOT FS_DLGBORDER | FS_BORDER | WS_VISIBLE, 
+            FCF_TITLEBAR | FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Current Order", RDGRP_SOURCEMENU, 5, 20, 112, 95, 
+                        NOT WS_GROUP
+        LISTBOX         RDLB_SOURCEMENU, 11, 24, 100, 80, LS_MULTIPLESEL | 
+                        LS_HORZSCROLL | LS_EXTENDEDSEL | WS_GROUP
+        PUSHBUTTON      "~Reorder", RDPB_MOVE, 122, 57, 40, 14, WS_GROUP
+        GROUPBOX        "New  Order", RDGRP_DESTINATIONMENU, 167, 20, 112, 
+                        95, NOT WS_GROUP
+        LISTBOX         RDLB_DESTINATIONMENU, 173, 24, 100, 80, 
+                        LS_HORZSCROLL | WS_GROUP | WS_DISABLED
+        DEFPUSHBUTTON   "~OK", DID_OK, 5, 3, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 122, 3, 40, 14
+        PUSHBUTTON      "~Help", DID_HELP, 239, 3, 40, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE PIID_PROGRAMDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Program Installation)", 
+            PIID_PROGRAMDIALOG, 49, -7, 316, 215, WS_VISIBLE, FCF_TITLEBAR | 
+            FCF_NOBYTEALIGN
+    BEGIN
+        DEFPUSHBUTTON   "~Ok", DID_OK, 4, 3, 43, 14
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 136, 3, 43, 14
+        PUSHBUTTON      "~Help", DID_HELP, 268, 3, 43, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE DDID_DESKTOPDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Desktop Configuration)", 
+            DDID_DESKTOPDIALOG, 50, 4, 316, 215, WS_VISIBLE, FCF_TITLEBAR | 
+            FCF_NOBYTEALIGN
+    BEGIN
+        DEFPUSHBUTTON   "~Save", DID_OK, 4, 3, 43, 14, WS_GROUP
+        PUSHBUTTON      "Bac~kup", DID_BACKUP, 94, 3, 40, 14
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 174, 3, 43, 14
+        PUSHBUTTON      "~Help", DID_HELP, 269, 3, 43, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE MDID_CONTROLDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Control Addition)", 
+            MDID_CONTROLDIALOG, 8, 4, 219, 133, NOT FS_DLGBORDER | FS_BORDER | 
+            WS_VISIBLE, FCF_TITLEBAR | FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Control Styles", MDGRP_CTRL, 5, 20, 209, 111, NOT 
+                        WS_GROUP
+        AUTORADIOBUTTON "Configure Popup Menu Settings", 
+                        MDRB_CTRL_CONFIGMENU, 9, 113, 150, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Configure Desktop Settings", 
+                        MDRB_CTRL_CONFIGDESKTOP, 9, 104, 150, 10
+        AUTORADIOBUTTON "About PC/2", MDRB_CTRL_ABOUT, 9, 95, 90, 10
+        AUTORADIOBUTTON "ShutDown OS/2", MDRB_CTRL_SHUTDOWN, 9, 86, 90, 10
+        AUTORADIOBUTTON "PowerDown OS/2", MDRB_CTRL_POWERDOWN, 9, 77, 100, 
+                        10
+        AUTORADIOBUTTON "Help F1", MDRB_CTRL_HELP, 9, 68, 90, 10
+        AUTORADIOBUTTON "Exit F3", MDRB_CTRL_EXIT, 9, 59, 90, 10
+        AUTORADIOBUTTON "PC/2 Spooler", MDRB_CTRL_SPOOLER, 9, 50, 90, 10
+        AUTORADIOBUTTON "Lockup OS/2", MDRB_CTRL_LOCKUP, 9, 41, 90, 10
+        AUTORADIOBUTTON "Break Separator", MDRB_CTRL_BRKSEPARATOR, 9, 32, 90, 
+                        10
+        AUTORADIOBUTTON "Menu Separator", MDRB_CTRL_SEPARATOR, 9, 23, 90, 10
+        DEFPUSHBUTTON   "~Ok", DID_OK, 5, 3, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 90, 3, 40, 14
+        PUSHBUTTON      "~Help", DID_HELP, 175, 3, 40, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE PIID_PAGE1 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE1, 12, -18, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Program Data", PIGRP_PROGRAM, 3, 2, 209, 158, NOT 
+                        WS_GROUP
+        LTEXT           "Program Title:", -1, 8, 142, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_PROGRAMTITLE, 79, 142, 126, 8, ES_MARGIN
+        LTEXT           "Executable:", -1, 8, 130, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_PATHFILENAME, 79, 130, 126, 8, ES_MARGIN
+        LTEXT           "Workdirectory:", -1, 8, 118, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_DIRECTORY, 79, 118, 126, 8, ES_MARGIN
+        LTEXT           "Parameters:", -1, 8, 106, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_PARAMETERS, 79, 106, 126, 8, ES_MARGIN
+        LTEXT           "Icon File:", 1213, 8, 94, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_ICONFILE, 79, 94, 126, 8, ES_MARGIN
+        PUSHBUTTON      "~Find Application...", PIPB_WINFILEDLG, 8, 77, 90, 
+                        14, WS_GROUP
+        PUSHBUTTON      "~DOS Settings...", PIPB_SETTINGSDLG, 116, 77, 90, 
+                        14, NOT WS_TABSTOP | NOT WS_VISIBLE
+        CTEXT           "DOS Settings are not available for this session typ"
+                        "e!", PIST_DOSSETTINGS, 11, 32, 175, 16, 
+                        DT_WORDBREAK | NOT WS_GROUP
+        MLE             "", PIMLE_DOSSETTINGS, 8, 6, 199, 69, MLS_HSCROLL | 
+                        MLS_VSCROLL | MLS_IGNORETAB | WS_GROUP | NOT 
+                        WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE PIID_PAGE2 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE2, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Program Type", PIGRP_TYPE, 3, 58, 209, 102, NOT 
+                        WS_GROUP
+        AUTORADIOBUTTON "Determined by WPS", PIRB_SHELL, 8, 142, 110, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "OS/2 Full-Screen", PIRB_OS2FULLSCREEN, 8, 133, 110, 
+                        10
+        AUTORADIOBUTTON "OS/2 Window", PIRB_OS2WINDOW, 8, 124, 110, 10
+        AUTORADIOBUTTON "Presentation Manager", PIRB_PM, 8, 115, 105, 10
+        AUTORADIOBUTTON "DOS Full-Screen", PIRB_DOSFULLSCREEN, 8, 106, 110, 
+                        10
+        AUTORADIOBUTTON "DOS Window", PIRB_DOSWINDOW, 8, 97, 110, 10
+        AUTORADIOBUTTON "WPS Object", PIRB_WPSOBJECT, 8, 88, 110, 10
+        AUTORADIOBUTTON "Detached", PIRB_DETACHED, 8, 79, 110, 10
+        AUTORADIOBUTTON "Seamless WIN-OS2", PIRB_WINOS2SEAMLESS, 8, 70, 110, 
+                        10
+        AUTORADIOBUTTON "Fullscreen WIN-OS2", PIRB_WINOS2FULLSCREEN, 8, 61, 
+                        110, 10
+        GROUPBOX        "WIN-OS2 settings", PIGRP_WINOS2, 3, 9, 209, 48, NOT 
+                        WS_GROUP
+        AUTORADIOBUTTON "Real Mode", PIRB_WINREAL, 8, 39, 110, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Standard Mode", PIRB_WINSTANDARD, 8, 30, 110, 10
+        AUTORADIOBUTTON "386 Enhanced Mode", PIRB_WIN386ENHANCED, 8, 21, 110, 
+                        10
+        AUTOCHECKBOX    "Separate Session", PICB_WINSEPARATE, 8, 12, 110, 10, 
+                        NOT WS_TABSTOP
+    END
+END
+
+DLGTEMPLATE PIID_PAGE6 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE6, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Session Environment", PIGRP_ENVIRONMENT, 3, 2, 209, 
+                        159, NOT WS_GROUP
+        LTEXT           "Environment Spaces:", PIST_ENVIRONMENTS, 8, 145, 95, 
+                        8, NOT WS_GROUP
+        AUTOCHECKBOX    "Verify on Startup", PICB_STARTUPENVIRONMENT, 107, 
+                        144, 99, 10, WS_GROUP
+        LISTBOX         PILB_ENVIRONMENTS, 8, 109, 198, 35, LS_MULTIPLESEL | 
+                        LS_HORZSCROLL | WS_GROUP
+        LTEXT           "Environment Modifications:", PIST_ENVIRONMENT, 8, 
+                        98, 115, 8
+        AUTORADIOBUTTON "Leading", PIRB_LEADENVIRONMENT, 8, 89, 60, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "Trailing", PIRB_TRAILENVIRONMENT, 105, 89, 60, 10
+        CTEXT           "Environment can't be changed for this session type!", 
+                        PIST_ENVSETTINGS, 18, 67, 175, 17, DT_WORDBREAK
+        MLE             "", PIMLE_ENVIRONMENT, 8, 6, 198, 82, MLS_HSCROLL | 
+                        MLS_VSCROLL | MLS_IGNORETAB | WS_GROUP
+    END
+END
+
+DLGTEMPLATE PIID_PAGE7 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE7, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Schedule automatic launch", PIGRP_SCHEDULE, 3, 2, 
+                        209, 159, NOT WS_GROUP
+        AUTORADIOBUTTON "Disabled", PIRB_DISABLESCHEDULER, 8, 143, 60, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "Hourly", PIRB_SCHEDULEHOURLY, 68, 143, 55, 10
+        AUTORADIOBUTTON "Daily", PIRB_SCHEDULEDAILY, 68, 134, 55, 10
+        AUTORADIOBUTTON "Weekly", PIRB_SCHEDULEWEEKLY, 68, 125, 60, 10
+        AUTORADIOBUTTON "Monthly", PIRB_SCHEDULEMONTHLY, 68, 116, 60, 10
+        AUTORADIOBUTTON "Once", PIRB_SCHEDULEONCE, 68, 107, 60, 10
+        AUTOCHECKBOX    "Save anyway", PICB_SCHEDULESAVEANYWAY, 123, 143, 80, 
+                        10, WS_GROUP
+        LTEXT           "Minute:", -1, 8, 97, 30, 8
+        LTEXT           "Hour:", -1, 38, 97, 30, 8
+        LTEXT           "Weekday:", -1, 68, 97, 50, 8
+        LTEXT           "Day:", -1, 123, 97, 25, 8
+        LISTBOX         PILB_SCHEDULEMINUTE, 8, 6, 23, 88, LS_EXTENDEDSEL | 
+                        WS_GROUP
+        LISTBOX         PILB_SCHEDULEHOUR, 38, 6, 23, 88, LS_EXTENDEDSEL
+        LISTBOX         PILB_SCHEDULEWEEKDAY, 68, 6, 48, 88, LS_EXTENDEDSEL
+        LISTBOX         PILB_SCHEDULEDAY, 123, 6, 22, 88, LS_EXTENDEDSEL
+        LTEXT           "Month:", -1, 151, 97, 35, 8
+        LISTBOX         PILB_SCHEDULEMONTH, 152, 6, 54, 88, LS_EXTENDEDSEL
+    END
+END
+
+DLGTEMPLATE CCID_PAGE1 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", CCID_PAGE1, 12, -18, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Popup Menu Control", CCGRP_CONTROL, 3, 138, 209, 22, 
+                        NOT WS_GROUP
+        LTEXT           "Control:", -1, 8, 142, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", CCEF_CONTROL, 79, 143, 126, 8, ES_MARGIN | 
+                        ES_READONLY
+    END
+END
+
+DLGTEMPLATE DDID_PAGE8B LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE8B, 12, -16, 215, 162, NOT FS_DLGBORDER | 
+            WS_VISIBLE, FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Environment Space Settings", DDGRP_ENVIRONMENT, 3, 
+                        2, 209, 160, NOT WS_GROUP
+        LTEXT           "Name:", -1, 8, 146, 40, 8
+        ENTRYFIELD      "", DDEF_ENVIRONMENT, 10, 135, 194, 8, ES_MARGIN | 
+                        WS_GROUP
+        LTEXT           "Variables:", -1, 8, 123, 50, 8, NOT WS_GROUP
+        MLE             "", DDMLE_ENVIRONMENT, 8, 7, 198, 114, MLS_HSCROLL | 
+                        MLS_VSCROLL | MLS_IGNORETAB
+    END
+END
+
+DLGTEMPLATE DDID_PAGE4 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE4, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Desktop Settings", DDGRP_PHYSICALDESKTOP, 3, 72, 
+                        209, 90, NOT WS_GROUP
+        LTEXT           "OS/2's Desktop Name:", -1, 8, 146, 105, 8, NOT 
+                        WS_GROUP
+        ENTRYFIELD      "", DDEF_DESKTOPNAME, 10, 136, 195, 8, ES_MARGIN | 
+                        WS_GROUP
+        LTEXT           "Window List Name:", -1, 8, 126, 105, 8, NOT 
+                        WS_GROUP
+        ENTRYFIELD      "", DDEF_WINDOWLISTNAME, 10, 116, 195, 8, ES_MARGIN
+        AUTOCHECKBOX    "Button 2 Titlebar click lowers Z-Order", 
+                        DDCB_BUTTON2ZORDER, 8, 103, 175, 10, WS_GROUP
+        GROUPBOX        "PM Background Bitmap", DDGRP_BACKGROUNDBITMAP, 3, 2, 
+                        209, 69, NOT WS_GROUP
+        AUTOCHECKBOX    "Background Bitmap", DDCB_BACKGROUNDBITMAP, 8, 51, 
+                        110, 10, WS_GROUP
+        PUSHBUTTON      "~Find Bitmap...", DDPB_WINFILEDLG, 117, 50, 75, 14
+        AUTORADIOBUTTON "Normal", DDRB_BITMAPNORMAL, 8, 24, 48, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Scaled", DDRB_BITMAPSCALED, 8, 15, 48, 10
+        AUTORADIOBUTTON "Tiled", DDRB_BITMAPTILED, 8, 6, 48, 10
+        LTEXT           "Tile count:", -1, 65, 7, 50, 8, NOT WS_GROUP
+        SPINBUTTON      DDSB_BITMAPTILEDCOUNT, 120, 6, 35, 12, SPBS_READONLY | 
+                        SPBS_MASTER | SPBS_JUSTLEFT | SPBS_FASTSPIN
+        ENTRYFIELD      "", DDEF_BACKGROUNDBITMAP, 10, 39, 195, 8, ES_MARGIN
+        AUTOCHECKBOX    "Use Spooler Control Window", DDCB_USESPOOLER, 8, 85, 
+                        175, 10, NOT WS_TABSTOP
+        CTEXT           "Due to a OS/2 bug (PMR 4X472)", -1, 56, 28, 151, 8, 
+                        NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+        CTEXT           "don't use tiled style for WARP!", -1, 56, 19, 151, 
+                        8, NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+        AUTOCHECKBOX    "Button 2 Border click moves window", 
+                        DDCB_BUTTON2MOVE, 8, 94, 175, 10, NOT WS_TABSTOP
+    END
+END
+
+DLGTEMPLATE DDID_PAGE7 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE7, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Security Settings", DDGRP_LOCKUP, 3, 22, 209, 140, 
+                        NOT WS_GROUP
+        LTEXT           "Access Password:", -1, 8, 144, 85, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_ACCESSPASSWORD, 132, 144, 73, 8, ES_MARGIN | 
+                        ES_UNREADABLE | WS_GROUP
+        LTEXT           "Verification:", -1, 8, 133, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_VERIFYACCESSPWD, 132, 133, 73, 8, ES_MARGIN | 
+                        ES_UNREADABLE
+        AUTOCHECKBOX    "Protect Popup Menu", DDCB_PC2SECURITY, 8, 121, 105, 
+                        10, WS_GROUP
+        ENTRYFIELD      "", DDEF_LOCKUPPASSWORD, 132, 110, 73, 8, ES_MARGIN | 
+                        ES_UNREADABLE | WS_GROUP
+        LTEXT           "Verification:", -1, 8, 99, 65, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_VERIFYLOCKUPPWD, 132, 99, 73, 8, ES_MARGIN | 
+                        ES_UNREADABLE
+        AUTOCHECKBOX    "Enable Lockup Timer", DDCB_ENABLELOCKUP, 8, 87, 111, 
+                        10, WS_GROUP
+        AUTOCHECKBOX    "Lockup after boot", DDCB_LOCKUPONBOOT, 8, 78, 95, 
+                        10, NOT WS_TABSTOP
+        LTEXT           "Automatic Lockup Timer:", -1, 8, 68, 110, 8, NOT 
+                        WS_GROUP
+        SPINBUTTON      DDSB_LOCKUPTIMER, 130, 66, 35, 12, SPBS_READONLY | 
+                        SPBS_MASTER | SPBS_JUSTRIGHT | SPBS_FASTSPIN | 
+                        WS_GROUP
+        LTEXT           "Minutes", -1, 170, 68, 40, 8, NOT WS_GROUP
+        LTEXT           "Lockup Password:", -1, 8, 110, 85, 8, NOT WS_GROUP
+    END
+END
+
+DLGTEMPLATE CDID_CONFIGDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (Setup)", CDID_CONFIGDIALOG, 51, -3, 
+            320, 233, NOT FS_DLGBORDER | FS_BORDER | WS_VISIBLE, 
+            FCF_TITLEBAR | FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Submenu/Program Configuration", -1, 4, 71, 313, 161, 
+                        NOT WS_GROUP
+        LTEXT           "", CDST_PATH, 8, 215, 305, 8
+        LISTBOX         CDLB_MENUPROGRAM, 9, 91, 150, 122, LS_HORZSCROLL | 
+                        WS_GROUP
+        PUSHBUTTON      "<< Level ~Up", CDPB_LEVELUP, 8, 74, 75, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "Level ~Down >>", CDPB_LEVELDOWN, 89, 74, 75, 14
+        PUSHBUTTON      "Add ~Program", CDPB_ADDPROGRAM, 164, 198, 75, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "Add C~ontrol", CDPB_ADDCONTROL, 164, 183, 75, 14
+        PUSHBUTTON      "Add Sub~menu", CDPB_ADDMENU, 164, 168, 75, 14
+        PUSHBUTTON      "Clo~ne Program", CDPB_CLONEPROGRAM, 164, 144, 75, 
+                        14, WS_GROUP
+        PUSHBUTTON      "Chan~ge Entry", CDPB_CHANGEENTRY, 164, 119, 75, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "Remo~ve Entry", CDPB_REMOVEENTRY, 164, 104, 75, 14
+        PUSHBUTTON      "R~esort Menu", CDPB_RESORT, 164, 89, 75, 14
+        PUSHBUTTON      "Cu~t", CDPB_CUT, 239, 198, 75, 14, WS_GROUP
+        PUSHBUTTON      "~Import", CDPB_IMPORTPROGRAM, 239, 104, 75, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "E~xport", CDPB_EXPORTPROGRAM, 239, 89, 75, 14
+        GROUPBOX        "Environment Spaces Management", -1, 4, 20, 313, 49, 
+                        NOT WS_GROUP
+        LISTBOX         CDLB_ENVIRONMENT, 9, 25, 227, 33, LS_EXTENDEDSEL | 
+                        WS_GROUP
+        PUSHBUTTON      "~Add", CDPB_ADDENVIRONMENT, 239, 45, 75, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "~Remove", CDPB_REMOVEENVIRONMENT, 239, 24, 75, 14, 
+                        NOT WS_TABSTOP
+        DEFPUSHBUTTON   "~Save", DID_OK, 4, 3, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Cancel", DID_CANCEL, 97, 3, 40, 14
+        PUSHBUTTON      "~Backup", DID_BACKUP, 185, 3, 40, 14
+        PUSHBUTTON      "~Help", DID_HELP, 276, 3, 40, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE PIID_PAGE3 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE3, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Program Style", PIGRP_STYLE, 3, 102, 209, 58, NOT 
+                        WS_GROUP
+        AUTORADIOBUTTON "Restored", PIRB_DEFAULTSTYLE, 110, 142, 75, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "Maximized", PIRB_MAXIMIZED, 110, 133, 75, 10
+        AUTORADIOBUTTON "Minimized", PIRB_MINIMIZED, 110, 124, 75, 10
+        AUTOCHECKBOX    "Invisible", PICB_INVISIBLE, 8, 142, 75, 10, 
+                        WS_GROUP
+        AUTOCHECKBOX    "No Autoclose", PICB_NOAUTOCLOSE, 8, 133, 75, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "Background", PICB_BACKGROUND, 8, 124, 75, 10, NOT 
+                        WS_TABSTOP
+        AUTOCHECKBOX    "Password Protected", PICB_PASSWORDPROTECT, 8, 115, 
+                        105, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "Autostart", PICB_AUTOSTART, 8, 106, 60, 10, NOT 
+                        WS_TABSTOP
+        RTEXT           "Delay: ", -1, 65, 107, 35, 8, DT_BOTTOM | NOT 
+                        WS_GROUP
+        CONTROL         "", PIHSB_AUTOSTARTDELAY, 104, 108, 60, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        ENTRYFIELD      "3600", PIEF_AUTOSTARTDELAY, 170, 107, 26, 8, 
+                        ES_MARGIN | ES_READONLY
+        RTEXT           "s", -1, 201, 107, 6, 8, NOT WS_GROUP
+        GROUPBOX        "User defined Position & Size", PIGRP_SIZEPOSITION, 
+                        3, 53, 209, 48, NOT WS_GROUP
+        AUTOCHECKBOX    "Enable", PICB_SIZEPOSITION, 8, 82, 45, 10, WS_GROUP
+        LTEXT           "Position:", DDEF_FRAMEHWND, 8, 71, 45, 8
+        ENTRYFIELD      "", PIEF_X, 73, 71, 36, 8, ES_MARGIN
+        CTEXT           "-", -1, 112, 59, 12, 8
+        ENTRYFIELD      "", PIEF_Y, 127, 71, 36, 8, ES_MARGIN
+        LTEXT           "Size", -1, 8, 59, 45, 8
+        ENTRYFIELD      "", PIEF_YSIZE, 127, 59, 36, 8, ES_MARGIN
+        CTEXT           "-", -1, 112, 71, 12, 8
+        ENTRYFIELD      "", PIEF_XSIZE, 73, 59, 36, 8, ES_MARGIN
+    END
+END
+
+DLGTEMPLATE DDID_PAGE9 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE9, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Registration", -1, 3, 2, 209, 160, NOT WS_GROUP
+        AUTOCHECKBOX    "Online Program Updates", DDCB_AUTOUPDATEENABLE, 8, 
+                        144, 130, 10, WS_GROUP
+        GROUPBOX        "", -1, 8, 92, 199, 55
+        AUTOCHECKBOX    "Send User Registration", DDCB_SENDREGISTRATION, 12, 
+                        131, 125, 10
+        LTEXT           "First Name:", -1, 12, 121, 50, 8
+        ENTRYFIELD      "", DDEF_FIRSTNAME, 68, 121, 131, 8, ES_MARGIN
+        LTEXT           "Last Name:", -1, 12, 109, 50, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_LASTNAME, 68, 109, 131, 8, ES_MARGIN
+        LTEXT           "E-Mail:", -1, 12, 97, 50, 8
+        ENTRYFIELD      "", DDEF_EMAILADDRESS, 68, 97, 131, 8, ES_MARGIN
+        GROUPBOX        "", -1, 8, 47, 199, 47, NOT WS_GROUP
+        LTEXT           "Url:", -1, 12, 77, 30, 8
+        ENTRYFIELD      "", DDEF_UPDATEURL, 48, 77, 151, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Proxy:", -1, 12, 65, 30, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_PROXYURL, 48, 65, 151, 8, ES_MARGIN
+        LTEXT           "Userid:", -1, 12, 53, 30, 8
+        ENTRYFIELD      "", DDEF_HTTPUSERID, 48, 53, 46, 8, ES_MARGIN
+        LTEXT           "Password:", -1, 101, 53, 45, 8
+        ENTRYFIELD      "", DDEF_HTTPPASSWORD, 153, 53, 46, 8, ES_MARGIN | 
+                        ES_UNREADABLE
+        PUSHBUTTON      "Update Now", DDPB_ACCESSNET, 8, 31, 65, 14
+        LTEXT           "", DDST_NETWORKSTATUS, 8, 5, 199, 25, DT_WORDBREAK
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+        AUTOCHECKBOX    "Show Status Window", DDCB_NETWORKSTATUS, 91, 33, 
+                        115, 10
+    END
+END
+
+DLGTEMPLATE DDID_PAGE1B LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE1B, 12, -16, 215, 162, NOT FS_DLGBORDER | 
+            WS_VISIBLE, FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Focus", DDGRP_SLIDINGFOCUS, 3, 118, 209, 44, NOT 
+                        WS_GROUP
+        AUTOCHECKBOX    "Sliding Focus", DDCB_SLIDINGFOCUS, 8, 143, 80, 10, 
+                        WS_GROUP
+        AUTOCHECKBOX    "Preserve Z Order", DDCB_PRESERVEZORDER, 107, 143, 
+                        90, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "Activate Windows", DDCB_ACTIVATEWINDOW, 107, 134, 
+                        90, 10, NOT WS_TABSTOP
+        LTEXT           "Activation Delay:", -1, 8, 124, 72, 8, NOT WS_GROUP
+        CONTROL         "", DDHSB_SLIDINGDELAY, 107, 126, 50, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        ENTRYFIELD      "", DDEF_SLIDINGDELAY, 163, 125, 26, 8, ES_MARGIN | 
+                        ES_READONLY | NOT WS_TABSTOP
+        LTEXT           "ms", -1, 195, 125, 15, 8, NOT WS_GROUP
+        GROUPBOX        "Hardware Panning", DDGRP_HWVIRTUALDESKTOP, 3, 2, 
+                        208, 115, NOT WS_GROUP
+        AUTOCHECKBOX    "Restrict Frame Size", DDCB_HWVIRTUALDESKTOP, 8, 99, 
+                        105, 10, WS_GROUP
+        AUTORADIOBUTTON "648 * 480", DDRB_640X480, 8, 90, 65, 10
+        AUTORADIOBUTTON "800 * 600", DDRB_800X600, 8, 81, 65, 10
+        AUTORADIOBUTTON "1024 * 768", DDRB_1024X768, 107, 90, 80, 10
+        AUTORADIOBUTTON "1280 * 1024", DDRB_1280X1024, 107, 81, 80, 10
+        LTEXT           "Exception List:", -1, 8, 72, 65, 8
+        MLE             "", DDMLE_PANNINGEXCEPTION, 8, 6, 197, 63, 
+                        MLS_HSCROLL | MLS_VSCROLL | MLS_IGNORETAB | WS_GROUP
+    END
+END
+
+DLGTEMPLATE DDID_PAGE8A LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE8A, 12, -16, 215, 162, NOT FS_DLGBORDER | 
+            WS_VISIBLE, FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Predefined Environment Spaces", DDGRP_ENVIRONMENT, 
+                        3, 2, 209, 160, NOT WS_GROUP
+        LISTBOX         DDLB_ENVIRONMENT, 9, 6, 142, 145, LS_HORZSCROLL | 
+                        LS_EXTENDEDSEL | WS_GROUP
+        PUSHBUTTON      "~Add", DDPB_ADDENVIRONMENT, 157, 138, 50, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "~Change", DDPB_CHANGEENVIRONMENT, 157, 123, 50, 14, 
+                        NOT WS_TABSTOP
+        PUSHBUTTON      "~Remove", DDPB_REMOVEENVIRONMENT, 157, 108, 50, 14, 
+                        NOT WS_TABSTOP
+        PUSHBUTTON      "As ~Batch", DDPB_2BATCHENVIRONMENT, 157, 35, 50, 14, 
+                        WS_GROUP
+        PUSHBUTTON      "~Export", DDPB_EXPORTENVIRONMENT, 157, 20, 50, 14, 
+                        NOT WS_TABSTOP
+        PUSHBUTTON      "~Import", DDPB_IMPORTENVIRONMENT, 157, 5, 50, 14, 
+                        NOT WS_TABSTOP
+    END
+END
+
+DLGTEMPLATE DDID_PAGE3 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE3, 12, -17, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "SessionBar", DDGRP_SESSIONBAR, 3, 22, 209, 140, NOT 
+                        WS_GROUP
+        AUTOCHECKBOX    "Show SessionBar", DDCB_SESSIONBAR, 9, 144, 95, 10, 
+                        WS_GROUP
+        RTEXT           "Icon", -1, 185, 145, 25, 8
+        AUTORADIOBUTTON "Large", DDRB_SESSIONBARLARGE, 107, 144, 45, 10, 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Small", DDRB_SESSIONBARSMALL, 150, 144, 43, 10
+        AUTOCHECKBOX    "Keep on Z-Order top", DDCB_KEEPONTOPSB, 9, 135, 97, 
+                        10
+        AUTOCHECKBOX    "BubbleHelp", DDCB_SESSIONBARHELP, 107, 135, 70, 10
+        AUTOCHECKBOX    "Hide Statusarea", DDCB_NOSESSIONNAME, 9, 126, 90, 
+                        10
+        AUTOCHECKBOX    "Default Date/Time", DDCB_DEFAULTDATETIME, 107, 126, 
+                        100, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "Hide Date/Time", DDCB_NODATETIME, 9, 117, 90, 10, 
+                        NOT WS_TABSTOP
+        LTEXT           "Format:", -1, 107, 118, 35, 8
+        ENTRYFIELD      "", DDEF_SESSIONBARDATETIME, 148, 118, 56, 8, 
+                        ES_MARGIN
+        AUTOCHECKBOX    "Dynamic Activation", DDCB_DYNAMICSESSIONBAR, 9, 108, 
+                        105, 10
+        LTEXT           "Activation Delay:", -1, 8, 99, 82, 8, NOT WS_GROUP
+        CONTROL         "", DDHSB_SESSIONBARDELAY, 107, 100, 50, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        ENTRYFIELD      "", DDEF_SESSIONBARDELAY, 163, 99, 26, 8, ES_MARGIN | 
+                        ES_READONLY | NOT WS_TABSTOP
+        LTEXT           "ms", -1, 195, 99, 15, 8, NOT WS_GROUP
+        LTEXT           "HotSpot Height:", -1, 8, 87, 83, 8
+        SPINBUTTON      DDSB_SESSIONBARHOTSPOT, 107, 85, 35, 12, 
+                        SPBS_READONLY | SPBS_MASTER | SPBS_JUSTLEFT
+        LTEXT           "pixels", -1, 150, 87, 30, 8
+        AUTOCHECKBOX    "Performance Chart", DDCB_CPUPERFORMANCE, 9, 73, 98, 
+                        10
+        AUTOCHECKBOX    "Fill Mode", DDCB_PERFORMANCEFILL, 107, 73, 55, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "No Grid", DDCB_NOGRID, 107, 65, 55, 10, NOT 
+                        WS_TABSTOP
+        LTEXT           "Exception List:", -1, 8, 64, 75, 8
+        MLE             "", DDMLE_SESSIONBAREXCEPTION, 8, 26, 198, 36, 
+                        MLS_HSCROLL | MLS_VSCROLL | MLS_IGNORETAB
+        AUTOCHECKBOX    "No Grid", DDCB_NOGRID, 107, 65, 55, 10
+        GROUPBOX        "QuickSwitch", DDGRP_QUICKSWITCH, 3, 2, 209, 20, NOT 
+                        WS_GROUP
+        AUTOCHECKBOX    "Show QuickSwitch", DDCB_ENABLEQUICKSWITCH, 9, 4, 
+                        105, 10, WS_GROUP
+    END
+END
+
+DLGTEMPLATE DDID_PAGE5 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE5, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "General PC/2 Settings", DDGRP_GENERAL, 3, 133, 209, 
+                        29, NOT WS_GROUP
+        AUTOCHECKBOX    "Ignore Autostart", DDCB_IGNOREAUTOSTART, 8, 144, 
+                        100, 10, WS_GROUP
+        AUTOCHECKBOX    "Ignore Scheduler", DDCB_IGNORESCHEDULER, 122, 144, 
+                        87, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "No systemwide Hotkeys", DDCB_HOTKEY4PC2ONLY, 8, 135, 
+                        115, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "Diagnostics", DDCB_ENABLEDIAGNOSTICS, 122, 135, 75, 
+                        10, NOT WS_TABSTOP
+        GROUPBOX        "Shutdown Options", DDGRP_SHUTDOWN, 3, 104, 209, 29, 
+                        NOT WS_GROUP
+        AUTOCHECKBOX    "Normal ShutDown (WPS method)", DDCB_NORMALSHUTDOWN, 
+                        8, 115, 170, 10, WS_GROUP
+        AUTOCHECKBOX    "No verify ShutDown", DDCB_NOVERIFYSHUTDOWN, 8, 106, 
+                        112, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "Reboot", DDCB_SHUTDOWNREBOOT, 122, 106, 50, 10, NOT 
+                        WS_TABSTOP
+        GROUPBOX        "PowerDown Options", DDGRP_POWERDOWN, 3, 62, 209, 42
+        AUTOCHECKBOX    "APM Support", DDCB_SUPPORTAPM, 8, 86, 80, 10, 
+                        WS_GROUP
+        AUTOCHECKBOX    "Enable APM", DDCB_ENABLEAPM, 122, 86, 70, 10
+        AUTORADIOBUTTON "Suspend", DDRB_POWERDOWNSUSPEND, 8, 77, 55, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "Pwr Off", DDRB_POWERDOWNPOWEROFF, 65, 77, 55, 10
+        AUTOCHECKBOX    "Don't verify", DDCB_NOVERIFYPOWERDOWN, 122, 77, 70, 
+                        10, WS_GROUP
+        AUTOCHECKBOX    "Enable PowerDown Timer", DDCB_ENABLEPOWERDOWN, 8, 
+                        65, 125, 10, WS_GROUP
+        SPINBUTTON      DDSB_POWERDOWNTIMER, 135, 65, 40, 12, SPBS_READONLY | 
+                        SPBS_MASTER | SPBS_JUSTRIGHT | SPBS_FASTSPIN
+        LTEXT           "Minutes", -1, 176, 67, 34, 8
+        GROUPBOX        "Advanced Marking Options", DDGRP_ADVANCEDMARKING, 3, 
+                        42, 209, 20, NOT WS_GROUP
+        AUTOCHECKBOX    "Adv. Marking", DDCB_ADVANCEDMARKING, 8, 44, 95, 10, 
+                        WS_GROUP
+        LTEXT           "Button:", -1, 122, 45, 35, 8
+        AUTORADIOBUTTON "2", DDRB_ADVMARKINGBUTTON2, 156, 44, 25, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "3", DDRB_ADVMARKINGBUTTON3, 181, 44, 25, 10, 
+                        WS_TABSTOP
+        GROUPBOX        "Dynamic MenuSelection Options", DDGRP_DYNAMICMENU, 
+                        3, 2, 209, 40, NOT WS_GROUP
+        AUTOCHECKBOX    "Dyn. MenuSelection", DDCB_DYNAMICMENU, 8, 24, 100, 
+                        10, WS_GROUP
+        AUTOCHECKBOX    "Cascade Submenus", DDCB_CASCADEMENU, 110, 24, 100, 
+                        10
+        AUTOCHECKBOX    "Keyboard", DDCB_DYNAMICMENUKBD, 110, 15, 65, 10
+        LTEXT           "Activation Delay:", -1, 8, 6, 82, 9, NOT WS_GROUP
+        CONTROL         "", DDHSB_DYNAMICDELAY, 110, 7, 50, 6, WC_SCROLLBAR, 
+                        SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        ENTRYFIELD      "", DDEF_DYNAMICDELAY, 164, 6, 26, 8, ES_MARGIN | 
+                        ES_READONLY | NOT WS_TABSTOP
+        LTEXT           "ms", -1, 195, 6, 15, 8, NOT WS_GROUP
+    END
+END
+
+DLGTEMPLATE DDID_PAGE6 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE6, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Titlebar Smarticons", DDGRP_TITLEBARICONS, 3, 2, 
+                        209, 160, NOT WS_GROUP
+        AUTOCHECKBOX    "Show Icons", DDCB_TITLEBARICONS, 8, 144, 70, 10, 
+                        WS_GROUP
+        AUTOCHECKBOX    "Close Window", DDCB_CLOSEWINDOW, 8, 135, 85, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "Rollup Window", DDCB_ROLLWINDOW, 8, 126, 85, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "Context Help", DDCB_HELP, 8, 117, 80, 10, NOT 
+                        WS_TABSTOP
+        AUTOCHECKBOX    "Move to Desktop", DDCB_MOVEVD, 107, 135, 95, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "Move to Edge", DDCB_MOVEEDGE, 107, 126, 90, 10, NOT 
+                        WS_TABSTOP
+        LTEXT           "Exception List:", -1, 8, 108, 65, 8, NOT WS_GROUP
+        MLE             "", DDMLE_TITLEBAREXCEPTION, 8, 46, 198, 60, 
+                        MLS_HSCROLL | MLS_VSCROLL | MLS_IGNORETAB | WS_GROUP
+        LTEXT           "Warning! Exiting PC/2 while having activated Titleb"
+                        "ar Smarticons can cause PM to hang, if you plan to "
+                        "exit PC/2 frequently I do recommend not to use that"
+                        " option.", -1, 8, 6, 198, 40, DT_WORDBREAK | NOT 
+                        WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+    END
+END
+
+DLGTEMPLATE DDID_PAGE2 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE2, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Overview Window", DDGRP_OVERVIEWWINDOW, 3, 107, 209, 
+                        55
+        AUTOCHECKBOX    "Edge Activation", DDCB_DYNAMICOVERVIEW, 8, 145, 90, 
+                        10, WS_GROUP
+        GROUPBOX        "", -1, 8, 110, 94, 38
+        AUTORADIOBUTTON "", DDRB_OVERVIEWUL, 7, 136, 10, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "", DDRB_OVERVIEWUR, 90, 136, 10, 10, WS_TABSTOP
+        AUTORADIOBUTTON "", DDRB_OVERVIEWLR, 90, 109, 10, 10, WS_TABSTOP
+        AUTORADIOBUTTON "", DDRB_OVERVIEWLL, 7, 109, 10, 10, WS_TABSTOP
+        LTEXT           "Delay:", -1, 17, 128, 35, 8
+        ENTRYFIELD      "", DDEF_OVERVIEWDELAY, 50, 128, 26, 8, ES_MARGIN | 
+                        ES_READONLY
+        CONTROL         "", DDHSB_OVERVIEWDELAY, 17, 119, 75, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        RTEXT           "ms", -1, 78, 128, 15, 8, NOT WS_GROUP
+        AUTOCHECKBOX    "Keep on Z-Order top", DDCB_KEEPONTOPOV, 107, 145, 
+                        102, 10, WS_GROUP
+        AUTOCHECKBOX    "Hide Titlebar", DDCB_HIDETITLEBAR, 107, 136, 80, 10
+        AUTOCHECKBOX    "Hide Smarticons", DDCB_HIDESMARTICONBAR, 107, 127, 
+                        90, 10
+        AUTOCHECKBOX    "Target Cursor", DDCB_TARGETCURSOR, 107, 118, 90, 10
+        AUTOCHECKBOX    "Single Click", DDCB_ONECLICKSWITCH, 107, 109, 75, 
+                        10
+        GROUPBOX        "Window Representation", DDGRP_OVERVIEWLOOK, 3, 39, 
+                        209, 68
+        AUTOCHECKBOX    "3D Border", DDCB_3DBORDER, 8, 89, 85, 10
+        AUTOCHECKBOX    "Window Titles", DDCB_OVERVIEWTITLES, 8, 80, 85, 10
+        AUTOCHECKBOX    "Color Optimization", DDCB_TITLEAUTOCOLOR, 107, 89, 
+                        95, 10
+        AUTORADIOBUTTON "Icons", DDRB_OVERVIEWICONS, 8, 70, 50, 10, 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Gradient", DDRB_OVERVIEWGRADIENT, 8, 61, 55, 10, 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Random", DDRB_OVERVIEWRANDOM, 8, 52, 55, 10, 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Monochrome", DDRB_OVERVIEWMONO, 8, 43, 75, 10, 
+                        WS_TABSTOP
+        GROUPBOX        "Colorization:", -1, 108, 42, 100, 48, NOT WS_GROUP
+        GROUPBOX        "", -1, 178, 45, 26, 42, NOT WS_GROUP
+        LTEXT           "Overview", DDST_COLOR1, 112, 73, 65, 8
+        CTEXT           "", DDST_RGBCOLOR1, 179, 73, 23, 9, DT_VCENTER | NOT 
+                        WS_GROUP
+        LTEXT           "", DDST_COLOR2, 112, 64, 65, 8, NOT WS_GROUP
+        CTEXT           "", DDST_RGBCOLOR2, 179, 64, 23, 9, DT_VCENTER | NOT 
+                        WS_GROUP
+        LTEXT           "", DDST_COLOR3, 112, 55, 65, 8, NOT WS_GROUP
+        CTEXT           "", DDST_RGBCOLOR3, 179, 55, 23, 9, DT_VCENTER | NOT 
+                        WS_GROUP
+        LTEXT           "", DDST_COLOR4, 112, 46, 65, 8, NOT WS_GROUP
+        CTEXT           "", DDST_RGBCOLOR4, 179, 46, 23, 9, DT_VCENTER | NOT 
+                        WS_GROUP
+        GROUPBOX        "Sticky Windows", DDGRP_STICKYWINDOWS, 3, 1, 209, 38, 
+                        NOT WS_GROUP
+        MLE             "", DDMLE_STICKYWINDOWS, 8, 2, 199, 28, MLS_WORDWRAP | 
+                        MLS_VSCROLL | MLS_IGNORETAB | WS_GROUP
+    END
+END
+
+DLGTEMPLATE PIID_PAGE5 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE5, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Session Priority", PIGRP_PROCESSPRIORITY, 3, 83, 
+                        209, 78, NOT WS_GROUP
+        AUTORADIOBUTTON "Idle Time", PIRB_IDLETIME, 8, 133, 85, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Regular", PIRB_REGULAR, 8, 124, 95, 10
+        AUTORADIOBUTTON "No Change", PIRB_NOCHANGE, 8, 115, 95, 10
+        AUTORADIOBUTTON "Time Critical", PIRB_TIMECRITICAL, 8, 106, 95, 10
+        AUTORADIOBUTTON "Foreground Server", PIRB_FOREGROUNDSERVER, 8, 97, 
+                        95, 10
+        LTEXT           "Priority Delta:", -1, 8, 88, 65, 8, NOT WS_GROUP
+        LTEXT           "Priority Class:", -1, 8, 143, 75, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_PRIORITYDELTA, 75, 88, 16, 8, ES_MARGIN | 
+                        ES_READONLY | WS_GROUP
+        CONTROL         "", PIHSB_PRIORITYDELTA, 96, 89, 110, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE PIID_PAGE4 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", PIID_PAGE4, 12, -16, 215, 162, NOT FS_DLGBORDER | WS_VISIBLE, 
+            FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Desktop Settings", PIGRP_DESKTOP, 3, 119, 209, 41, 
+                        NOT WS_GROUP
+        LTEXT           "Window Name:", -1, 8, 142, 70, 8, NOT WS_GROUP
+        ENTRYFIELD      "", PIEF_SESSIONTITLE, 79, 142, 125, 8, ES_MARGIN
+        AUTOCHECKBOX    "Sticky Window (Keep on active Desktop)", 
+                        PICB_DONTMOVE, 8, 130, 198, 10, WS_GROUP
+        AUTOCHECKBOX    "Enable Hotkey", PICB_HOTKEYENABLED, 8, 121, 80, 10, 
+                        NOT WS_TABSTOP
+        GROUPBOX        "Hotkey Definition", PIGRP_HOTKEY, 3, 67, 209, 51, 
+                        NOT WS_GROUP
+        AUTORADIOBUTTON "Default", PIRB_NONE, 8, 100, 57, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Maximized", PIRB_WSMAXIMIZED, 8, 91, 59, 10
+        AUTORADIOBUTTON "Restored", PIRB_WSRESTORE, 8, 82, 60, 10
+        AUTOCHECKBOX    "RCtrl-Key", PICB_RCTRL, 107, 100, 65, 10, WS_GROUP
+        AUTOCHECKBOX    "Ctrl-Key", PICB_CTRL, 107, 91, 65, 10, NOT 
+                        WS_TABSTOP
+        AUTOCHECKBOX    "Alt-Key", PICB_ALT, 107, 82, 65, 10, NOT WS_TABSTOP
+        AUTOCHECKBOX    "LWin-Key", PICB_LWIN, 107, 73, 65, 10, NOT 
+                        WS_TABSTOP
+        CONTROL         "", PICBX_HOTKEY, 176, 3, 30, 108, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        GROUPBOX        "Current Window List", PIGRP_WINDOWLIST, 3, 2, 209, 
+                        64, NOT WS_GROUP
+        LISTBOX         PILB_WINDOWLIST, 8, 6, 197, 50, LS_HORZSCROLL | 
+                        WS_GROUP
+    END
+END
+
+DLGTEMPLATE ADID_ABOUTDIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "PC/2 - Program Commander/2 (About)", ADID_ABOUTDIALOG, 0, -4, 
+            365, 184, NOT FS_DLGBORDER | FS_BORDER | WS_VISIBLE, 
+            FCF_TITLEBAR | FCF_NOBYTEALIGN
+    BEGIN
+        ICON            ID_PC2MAINWINDOW, ID_PC2MAINWINDOW, 5, 149, 20, 16, 
+                        WS_GROUP
+        CTEXT           "PC/2 - Program Commander/2 Version 2.20 for", -1, 
+                        56, 165, 295, 8, NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00E11919L
+        CTEXT           "IBM OS/2 2.x, WARP, WARP Srv. SMP, Aurora Presentat"
+                        "ion Manager", -1, 49, 157, 310, 8, NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00E11919L
+        CTEXT           "Copyright (C) by Roman Stangl December, 2000", -1, 
+                        56, 149, 295, 8, NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00E11919L
+        CTEXT           "", ADID_ABOUTBLDLEVEL, 56, 141, 295, 8, NOT 
+                        WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x001919FFL
+        CTEXT           "", -1, 51, 133, 295, 8, NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x001919FFL
+        CTEXT           "Strebersdorferstr. 46,  A-2103 Langenzersdorf, Aust"
+                        "ria (Europe)", -1, 35, 118, 320, 8, NOT WS_GROUP
+        LTEXT           "Snail Mail:", -1, 5, 126, 48, 8, NOT WS_GROUP
+        LTEXT           "E-Mail:", -1, 5, 108, 36, 8, NOT WS_GROUP
+        CTEXT           "Roman_Stangl@at.ibm.com (InterNet preferred)", -1, 
+                        54, 108, 275, 8, NOT WS_GROUP
+        CTEXT           "rstangl@vnet.ibm.com (InterNet)", -1, 69, 100, 245, 
+                        8, NOT WS_GROUP
+        CTEXT           "warpguru@geocities.com (InterNet)", -1, 70, 92, 245, 
+                        8, NOT WS_GROUP
+        CTEXT           "Roman Stangl/Austria/IBM@IBMAT (IBM Internal Lotus "
+                        "Notes)", -1, 49, 84, 295, 8, NOT WS_GROUP
+        CTEXT           "Any mail, positive or negative, is welcome!", -1, 
+                        44, 76, 295, 8, NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x001919FFL
+        LTEXT           "WWW:", -1, 5, 66, 48, 8, NOT WS_GROUP
+        CTEXT           "http://www.geocities.com/SiliconValley/Pines/7885/ "
+                        "(InterNet)", -1, 50, 66, 285, 8, NOT WS_GROUP
+        CTEXT           "", -1, 25, 58, 325, 8, NOT WS_GROUP
+        CTEXT           "This program is provided as-is and classified Freew"
+                        "are and may be freely distri-", -1, 5, 48, 354, 8, 
+                        NOT WS_GROUP
+        CTEXT           "buted and modfied, provided you accept the conditio"
+                        "ns stated in the documentation!", -1, 5, 40, 354, 8, 
+                        NOT WS_GROUP
+        CTEXT           "Please press the Help-button to get more informatio"
+                        "n about these conditions,", -1, 5, 30, 354, 8, NOT 
+                        WS_GROUP
+        CTEXT           "and some more information how PC/2 let's you become"
+                        " more productive!", -1, 4, 22, 354, 8, NOT WS_GROUP
+        DEFPUSHBUTTON   "~Ok", DID_OK, 4, 3, 40, 14, WS_GROUP
+        PUSHBUTTON      "~Help", DID_HELP, 320, 3, 40, 14, BS_HELP
+    END
+END
+
+DLGTEMPLATE DDID_PAGE10 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE10, 12, -16, 215, 162, NOT FS_DLGBORDER | 
+            WS_VISIBLE, FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Frame window data", -1, 3, 2, 209, 160, NOT 
+                        WS_GROUP
+        AUTOCHECKBOX    "Enable spying", DDCB_SPYFRAMEWINDOW, 8, 144, 80, 10, 
+                        WS_GROUP
+        LTEXT           "Title:", -1, 8, 136, 55, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_FRAMEWINDOWTEXT, 10, 124, 194, 8, ES_MARGIN | 
+                        ES_READONLY | WS_GROUP
+        LTEXT           "Executable:", -1, 8, 114, 55, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_EXECUTABLE, 10, 102, 194, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Window List:", -1, 8, 90, 55, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_FRAMEWINDOWLIST, 73, 90, 131, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Class:", -1, 8, 78, 55, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_FRAMEWINDOWCLASS, 73, 78, 131, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Process:", -1, 8, 66, 45, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_FRAMEPID, 73, 66, 36, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Thread:", -1, 8, 54, 45, 8, NOT WS_GROUP
+        ENTRYFIELD      "", DDEF_FRAMETID, 73, 54, 36, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Position:", -1, 8, 42, 45, 8
+        ENTRYFIELD      "", DDEF_FRAMEX, 73, 42, 36, 8, ES_MARGIN | 
+                        ES_READONLY
+        CTEXT           "-", -1, 112, 30, 12, 8
+        ENTRYFIELD      "", DDEF_FRAMEY, 127, 42, 36, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Size", -1, 8, 30, 45, 8
+        ENTRYFIELD      "", DDEF_FRAMECX, 73, 30, 36, 8, ES_MARGIN | 
+                        ES_READONLY
+        CTEXT           "-", -1, 112, 42, 12, 8
+        ENTRYFIELD      "", DDEF_FRAMECY, 127, 30, 36, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "Frame Handle:", -1, 8, 18, 62, 8
+        ENTRYFIELD      "", DDEF_FRAMEHWND, 73, 18, 61, 8, ES_MARGIN | 
+                        ES_READONLY
+    END
+END
+
+DLGTEMPLATE DDID_PAGE1A LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", DDID_PAGE1A, -31, -15, 215, 162, NOT FS_DLGBORDER | 
+            WS_VISIBLE, FCF_NOBYTEALIGN
+    BEGIN
+        GROUPBOX        "Virtual Desktop", DDGRP_VIRTUALDESKTOP, 3, 92, 209, 
+                        70, NOT WS_GROUP
+        AUTOCHECKBOX    "Virtual Desktop", DDCB_VIRTUALDESKTOP, 8, 143, 90, 
+                        10, WS_GROUP
+        LTEXT           "Count:", -1, 106, 144, 35, 8, NOT WS_GROUP
+        SPINBUTTON      DDSB_HORIZONTALDESKTOPS, 141, 142, 27, 12, 
+                        SPBS_READONLY | SPBS_MASTER | SPBS_JUSTLEFT
+        CTEXT           "*", -1, 170, 144, 6, 8, NOT WS_GROUP
+        SPINBUTTON      DDSB_VERTICALDESKTOPS, 178, 142, 27, 12, 
+                        SPBS_READONLY | SPBS_MASTER | SPBS_JUSTLEFT
+        AUTOCHECKBOX    "Overview Window", DDCB_OVERVIEW, 8, 132, 95, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "Follow Focus", DDCB_FOLLOWFOCUS, 107, 132, 90, 10, 
+                        WS_GROUP
+        AUTOCHECKBOX    "Click to Move", DDCB_CLICK2MOVE, 8, 123, 80, 10, 
+                        NOT WS_TABSTOP
+        AUTOCHECKBOX    "Autoscroll", DDCB_AUTOSCROLL, 8, 114, 65, 10, NOT 
+                        WS_TABSTOP
+        LTEXT           "Scrolling Delay:", -1, 107, 124, 80, 8, NOT 
+                        WS_GROUP
+        CONTROL         "", DDHSB_DESKTOPDELAY, 107, 116, 50, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        ENTRYFIELD      "", DDEF_DESKTOPDELAY, 162, 115, 26, 8, ES_MARGIN | 
+                        ES_READONLY | NOT WS_TABSTOP
+        LTEXT           "ms", -1, 195, 115, 15, 8, NOT WS_GROUP
+        AUTOCHECKBOX    "Move WPS", DDCB_MOVEDESKTOP, 8, 105, 70, 10, NOT 
+                        WS_TABSTOP
+        AUTOCHECKBOX    "Expand WPS", DDCB_EXPANDWPS, 107, 105, 80, 10, NOT 
+                        WS_TABSTOP
+        LTEXT           "Desktop Scrolling:", -1, 9, 97, 85, 8, NOT WS_GROUP
+        CONTROL         "", DDHSB_SCROLLPERCENTAGE, 107, 98, 60, 6, 
+                        WC_SCROLLBAR, SBS_HORZ | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        ENTRYFIELD      "", DDEF_SCROLLPERCENTAGE, 173, 97, 21, 8, ES_MARGIN | 
+                        ES_READONLY
+        RTEXT           "%", -1, 197, 98, 10, 8, NOT WS_GROUP
+        GROUPBOX        "Popup Menu Control", DDGRP_POPUP, 3, 2, 209, 90, 
+                        NOT WS_GROUP
+        AUTORADIOBUTTON "Button 1", DDRB_BUTTON1, 8, 73, 60, 10, WS_GROUP | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Button 3", DDRB_BUTTON3, 8, 64, 60, 10
+        AUTOCHECKBOX    "Over any window", DDCB_SYSTEMWIDE, 8, 55, 95, 10, 
+                        NOT WS_TABSTOP
+        AUTORADIOBUTTON "Single Click", DDRB_BUTTONCLICK, 8, 43, 70, 10, 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "Double Click", DDRB_BUTTONDBLCLK, 8, 34, 70, 10
+        AUTOCHECKBOX    "Draw Icons", DDCB_POPUPICON, 8, 22, 65, 10, 
+                        WS_GROUP
+        AUTORADIOBUTTON "Full Size", DDRB_FULLSIZE, 8, 13, 60, 10, 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "Half Size", DDRB_HALFSIZE, 8, 4, 60, 10, WS_TABSTOP
+        AUTORADIOBUTTON "Default Selection", DDRB_SELECTDEFAULT, 107, 73, 
+                        100, 10, WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "Preselect First Item", DDRB_SELECTFIRSTITEM, 107, 
+                        64, 100, 10
+        AUTORADIOBUTTON "Select Menu Center", DDRB_SELECTCENTER, 107, 55, 
+                        100, 10
+        AUTOCHECKBOX    "Left+Right SHIFT", DDCB_LEFTRIGHTSHIFT, 107, 43, 95, 
+                        10, WS_GROUP
+        RTEXT           "CTRL", -1, 183, 35, 27, 8, NOT WS_GROUP
+        AUTOCHECKBOX    "Left", DDCB_LEFTCTL, 107, 34, 33, 10
+        AUTOCHECKBOX    "Right", DDCB_RIGHTCTL, 145, 34, 40, 10
+        RTEXT           "WIN", -1, 183, 26, 27, 8
+        AUTOCHECKBOX    "Left", DDCB_LEFTWIN95, 107, 25, 33, 10, WS_GROUP
+        AUTOCHECKBOX    "Right", DDCB_RIGHTWIN95, 145, 25, 40, 10
+        AUTOCHECKBOX    "WIN Menu", DDCB_WIN95MENU, 107, 16, 80, 10
+        AUTOCHECKBOX    "Caps", DDCB_CAPSLOCK, 107, 7, 38, 10
+        AUTOCHECKBOX    "Scroll", DDCB_SCROLLLOCK, 147, 7, 44, 10
+        RTEXT           "Lock", -1, 190, 8, 20, 8
+    END
+END

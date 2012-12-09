@@ -1,0 +1,197 @@
+
+#===================================================================
+#
+# PC/2 - Program Commander/2 Makefile for EMX C/C++ and GNU GCC
+#
+# Special thanks to Roland Emmerich for providing us the Makefile
+# to compile PC/2 with EMX 0.9a or GNU GCC 2.6.3. Unfortunatly the
+# makefile may not work automatically because I don't use GCC and
+# I've made some changes not reflected in this makefile yet
+#
+# Note: GNUMAKE (used to make this Mekefile) insists on a tabulator
+#       on any line starting with spaces.
+# 
+# Note: To compile WPS2PC2.DLL you must have installed IBM's Toolkit
+#       to have the SOM compiler accessible. You may not want to
+#       make WPS2PC2.DLL otherwise.
+#
+# Note: To compile PC2.HLP and WPS2PC2.HLP you must have IPFCPREP,
+#       a help precompiler, available under the IBM EWS program,
+#       accessible. You also must have IPFC from IBM's Toolkit
+#	    available. You may not want to make the online help files
+#       otherwise.
+#
+# Note: You may want to invoke GNUMAKE with a certain target,
+#       if you don't have IBM's Toolkit and/or IPFCPREP available
+#       and leave the files not recompilable by your environment
+#       from the original PC/2's archive.
+#
+# Note: You may recompile and distribute your modifications, but
+#       you are required to distribute the the original archive
+#       too and just add your changes for example in your own
+#       archive.
+#	
+#===================================================================
+
+!ifndef SLOWVIDEO
+VIDEO =
+!else
+VIDEO = /DSLOWVIDEO
+!endif
+
+CFLAGS = -O -Zomf -Zmtd -v $(VIDEO)
+CFLAGSDLL= -O -Zomf -Zmtd -Zdll -v $(VIDEO)
+
+LFLAGS = -Zomf -Zmtd -s
+LFLAGSDLL = -Zomf -Zmtd -Zdll -s
+# Libraries
+# gcc knows what is good for us ...
+LIBS =
+
+# Test for IBM Toolkit V2.1 or IBM Warp Toolkit V3.0
+
+!ifdef IBMTLKT30
+TOOLKIT = /DIBMTLKT30
+!else
+TOOLKIT = /DIBMTLKT21
+!endif # IBMTLKT30
+
+# Directories
+# \.        Executables, help panels, DLLs, documentation, profiles
+# \Source   Source, object modules, headers, import library
+SRC=Source
+
+CC = gcc -c $(CFLAGS)
+CCDLL = gcc -c $(CFLAGSDLL)
+LINK = gcc
+IMP = EMXIMP -o
+
+# SC Flags
+# For the SOM compiler, the following environment variables are assumed
+# to be set for the IBM OS/2 Developer's Toolkit 2.1:
+#
+# SET SMINCLUDE=.;x:\TOOLKT21\SC;
+# SET SMTMP=x:\
+# SET SMEMIT=ih;h;ph;psc;sc;c;def
+# SOM 1 (Toolkit 2.1)
+#   -v          Verbose mode
+#   -r          Check that release order entries exist
+#   -d          Output directory of emitted file
+#
+# SOM 2 (Toolkit 3.0)
+#   Note: The path .;.\Source; must be included in the INCLUDE path
+#   -maddstar   add * to C bindings for interface references
+#   -mnoint     don't warn about "int" causing portability problems
+#   -S128000    size of string buffer (default 49152)
+#   -C128000    size of comment buffer (default 59152)
+#   -v          verbose debugging move
+#   -p          shorthand for -D__PRIVATE__
+#   -s c        replace SMEMIT variable with <string> (creates *.C file)
+#   -s def      replace SMEMIT variable with <string> (creates *.DEF file)
+#
+# For the SOM compiler, the following environment variables are assumed
+# to be set for the IBM OS/2 Warp Developer's Toolkit 3.0:
+#
+# SET SMINCLUDE=.;x:\TOOLKT30\IDL;x:\TOOLKT30\SOM\INCLUDE;
+# SET SMTMP=x:\
+# SET SMEMIT=ih;h;c;def
+# SET SMADDSTAR=1
+# SET SMNOTC=1
+
+!ifdef IBMTLKT30
+SCFLAGS = -maddstar -mnoint -S128000 -C128000 -v -p
+SCFLAGS1 = -maddstar -mnoint -S128000 -C128000 -v -p -s c
+SCFLAGS2 = -maddstar -mnoint -S128000 -C128000 -v -p -s def
+SOMLIB = SOMTK
+!else
+SCFLAGS = -v -r -d $(SRC)
+SOMLIB = SOM
+!endif # IBMTLKT30
+
+HEADERS = $(SRC)/PC2.h $(SRC)/Error.h
+
+ALL_OBJ = $(SRC)/PC2.obj $(SRC)/Switch.obj $(SRC)/Dialog.obj $(SRC)/Utility.obj $(SRC)/Error.obj $(SRC)/Thread.obj
+
+all: PC2.exe PC2Hook.dll PC2Spool.dll #WPS2PC2.dll PC2.hlp WPS2PC2.hlp
+
+clean:
+	-del *.exe
+	-del PC2Hook.dll
+	-del PC2Spool.dll
+	-del $(SRC)\*.obj
+	-del $(SRC)\*.res
+
+save:
+	-del PC2-Save.zip
+	zip -9 -r PC2 *
+	unzip -t PC2
+	copy PC2.zip PC2-Save.zip /v
+
+$(SRC)/Switch.obj: $(SRC)/Switch.c $(HEADERS)
+	$(CC) -o $(SRC)/Switch.obj $(SRC)/Switch.c
+
+$(SRC)/Dialog.obj: $(SRC)/Dialog.c $(HEADERS)
+	$(CC) -o $(SRC)/Dialog.obj $(SRC)/Dialog.c
+
+$(SRC)/Utility.obj: $(SRC)/Utility.c $(HEADERS)
+	$(CC) -o $(SRC)/Utility.obj $(SRC)/Utility.c
+
+$(SRC)/Thread.obj: $(SRC)/Thread.c $(HEADERS)
+	$(CC) -o $(SRC)/Thread.obj $(SRC)/Thread.c
+
+$(SRC)/Error.obj: $(SRC)/Error.c $(SRC)/Error.h
+	$(CC) -o $(SRC)/Error.obj $(SRC)/Error.c
+
+$(SRC)/PC2.obj: $(SRC)/PC2.c $(HEADERS)
+	$(CC) -o $(SRC)/PC2.obj $(SRC)/PC2.c
+
+$(SRC)/WPS2PC2.c: $(SRC)/WPS2PC2.csc $(HEADERS)
+	$(SC) $(SRC)/WPS2PC2.csc
+
+$(SRC)/WPS2PC2.obj: $(SRC)/WPS2PC2.c $(SRC)/WPS2PC2.h $(SRC)/WPS2PC2.ih $(HEADERS)
+	$(CCDLL) -o $(SRC)/WPS2PC2.obj $(SRC)/WPS2PC2.c
+
+PC2.hlp: $(SRC)/PC2.ipp
+	cd $(SRC)& \
+	ipfcprep PC2.ipp PC2.ipf /D IPFC&\
+	ipfc PC2.ipf
+	copy $(SRC)/PC2.hlp PC2.hlp >NUL
+	del $(SRC)/PC2.hlp >NUL
+
+$(SRC)/PC2.res: $(SRC)/PC2.rc $(SRC)/PC2.h $(SRC)/PC2.dlg
+	cd $(SRC)& \
+	rc -r -i c:\emx\include PC2.rc
+
+$(SRC)/PC2Spool.res: $(SRC)/PC2Spool.rc $(SRC)/PC2.h
+	cd $(SRC)& \
+	rc -r -i c:\emx\include PC2Spool.rc
+
+$(SRC)/WPS2PC2.res: $(SRC)/WPS2PC2.rc $(SRC)/PC2.h
+	cd $(SRC)& \
+	rc -r -i c:\emx\include WPS2PC2.rc
+
+$(SRC)/PC2Hook.obj: $(SRC)/PC2Hook.c $(HEADERS)
+	$(CCDLL) -o $(SRC)/PC2Hook.obj $(SRC)/PC2Hook.c
+
+PC2Hook.dll: $(SRC)/PC2Hook.obj $(SRC)/PC2Hook.def
+	$(LINK) $(LFLAGSDLL) -o $@ $^
+
+$(SRC)/PC2Spool.obj: $(SRC)/PC2Spool.c $(HEADERS)
+	$(CCDLL) -o $(SRC)/PC2Spool.obj $(SRC)/PC2Spool.c
+
+PC2Spool.dll: $(SRC)/PC2Spool.obj $(SRC)/PC2Spool.def $(SRC)/PC2Spool.res
+	$(LINK) $(LFLAGSDLL) -o $@ $^
+
+WPS2PC2.dll: $(SRC)/WPS2PC2.obj $(SRC)/WPS2PC2.def $(SRC)/WPS2PC2.res
+	$(LINK) $(LFLAGSDLL) -o $@ $^
+
+WPS2PC2.hlp: $(SRC)/WPS2PC2.ipp
+	cd $(SRC)& \
+	ipfcprep WPS2PC2.ipp WPS2PC2.ipf /D IPFC& \
+	ipfc WPS2PC2.ipf
+	copy $(SRC)/WPS2PC2.hlp WPS2PC2.hlp >NUL
+	del $(SRC)/WPS2PC2.hlp >NUL
+
+PC2.exe: $(ALL_OBJ) $(SRC)/PC2.def $(SRC)/PC2.res
+	$(LINK) $(LFLAGS) -o $@ $^
+

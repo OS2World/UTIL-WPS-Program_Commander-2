@@ -1,0 +1,10 @@
+NAME        PC2     WINDOWAPI
+NEWFILES
+
+Description '$@#(C) Roman_Stangl@at.ibm.com:2.20 (12, 2000) (PC2.exe)#@PC/2 - Program Commander/2'
+
+DATA        MULTIPLE
+STACKSIZE   256000
+HEAPSIZE    128000
+PROTMODE
+

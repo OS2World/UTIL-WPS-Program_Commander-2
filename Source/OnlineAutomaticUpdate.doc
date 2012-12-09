@@ -1,0 +1,53 @@
+******************************************************************************
+                       Online Automatic Update (Simulation)
+
+                   PC/2 - Program Commander/2 Version 2.20 for
+     IBM OS/2 2.x, OS/2 WARP, WARP Srv. SMP, Aurora Presentation Manager
+                  Copyright (C) by Roman Stangl December, 2000
+
+                               Version 2.20 Draft
+******************************************************************************
+
+While you can easily test the retrieval of the URL part of the Online 
+Automatic Update feature, it is difficult to test the Registration part,
+because one has to simulate the Cgi-Bin of Geocities which is used for
+that purpose.
+
+To make a simulation with a local Web-Server (e.g. IBM's ICS or Lotus Go are
+the ones I'm using) do the following:
+
+1) In the Registration notebook page replace the Url by
+   http://localhost/homepagegeocities/AutoUpdate.html
+   where localhost is the host running the Web-Server and the 
+   \homepagegeocities\ directory on your Web-Server contains a copy of 
+   AutoUpdate.html.
+
+   That should be enough to test the URL part from your browser.
+
+2) Use the OnlineAutomaticUpdate.html page to verify you installed the 
+   Registration part correctly:
+   *) Copy Mail.cmd into the \CGI-BIN\homestead\ of your Web-Server
+   *) You may want to run the logs on your Web-Server to ensure it does
+      the same as IBM's ICS that is if not *.pl (Perl) script is found
+      it tries to run *.cmd instead (e.g. the Registration uses
+      according to the Geocities conventions a mail.pl script, but when
+      not having Perl installed that can be simulated by just providing
+      mail.cmd instead to ICS.
+
+   That should be enough to test the Registration part from your browser.
+
+3) Now run PC/2's Online Automatic Update. It should now be able to use
+   your local Web-Server.
+
+By the way, PC/2 posts during the Registration part:
+   POST /cgi-bin/homestead/mail.pl\?warpguru HTTP/1.0\r\n
+   Connection: Close\r\nUser-Agent: PC/2 2.20 (OS/2; I)\r\n
+   Pragma: no-cache\r\nHost: pc770.pc.com\r\n
+   Accept: text/html, text/plain, 
+   Content-type: application/x-www-form-urlencoded\r\n
+   Content-length: 183\r\n\r\n
+   Subject=PC%2F2+V2.20%20%2807%2C%202000%29+Online+Automatic+Update&
+   FirstName=Roman&LastName=Stangl&Email=Roman%5FStangl%40pc770.pc.com&
+   TCP%2FIP%20Address=1.1.1.3&Hostname=pc750.pc.com
+
+Hope that helps! Roman

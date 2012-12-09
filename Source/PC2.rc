@@ -1,0 +1,85 @@
+#include    <os2.h>
+#include    "PC2.h"
+
+ICON        ID_PC2MAINWINDOW    PRELOAD     Source\Resource\PC2.ico
+
+MENU        ID_PC2MAINWINDOW
+BEGIN
+    MENUITEM    "#310",                     ID_ICONEXIT,            MIS_TEXT, MIA_DISABLED
+    MENUITEM    "#311",                     ID_ICONMOVE,            MIS_TEXT, MIA_FRAMED
+    MENUITEM    "#312",                     ID_ICONHIDE,            MIS_TEXT
+    MENUITEM    "#313",                     ID_ICONZORDERTOP,       MIS_TEXT
+    MENUITEM    "#314",                     ID_ICONZORDERBOTTOM,    MIS_TEXT
+    MENUITEM    "#315",                     ID_ICONCLOSE,           MIS_TEXT
+    MENUITEM    "#316",                     ID_ICONMAXIMIZE,        MIS_TEXT
+    MENUITEM    "#317",                     ID_ICONMINIMIZE,        MIS_TEXT
+    MENUITEM    "#318",                     ID_ICONRESTORE,         MIS_TEXT
+    MENUITEM    "#319",                     ID_ICONSHUTDOWN,        MIS_TEXT
+    MENUITEM    "#320",                     ID_ICONPOWERDOWN,       MIS_TEXT, MIA_DISABLED
+    MENUITEM    "#321",                     ID_ICONLOCKUP,          MIS_TEXT
+    MENUITEM    "#322",                     ID_ICONHELP,            MIS_TEXT
+END
+
+MENU        ID_PC2SESSIONWINDOW
+BEGIN
+    MENUITEM    "~Show all Icons",          ID_ICONSUNHIDE,         MIS_TEXT
+    MENUITEM    "~Hide Icon",               ID_ICONHIDE,            MIS_TEXT
+    MENUITEM    SEPARATOR
+    MENUITEM    "Close ~Application",       ID_ICONSHUTDOWN,        MIS_TEXT
+    MENUITEM    "Close ~Window",            ID_ICONEXIT,            MIS_TEXT
+END
+
+MENU        ID_SBPERFORMANCEMENU
+BEGIN
+    SUBMENU     "~Settings",                ID_SBSETTINGSMENU
+    BEGIN
+        MENUITEM    "~60 seconds",          ID_SBSETTINGS60S,       MIS_TEXT
+        MENUITEM    "~5 minutes",           ID_SBSETTINGS5M,        MIS_TEXT
+        MENUITEM    "~30 minutes",          ID_SBSETTINGS30M,       MIS_TEXT
+        MENUITEM    "~1 hour",              ID_SBSETTINGS1H,        MIS_TEXT
+    END
+    MENUITEM    "CPU ~1 online",            ID_SBPROCESSOR_CPU1,    MIS_TEXT, MIA_CHECKED|MIA_DISABLED
+END
+
+MENU        ID_SBSTATUSMENU
+BEGIN
+    MENUITEM    "~Left justified",          ID_SBLEFTJUSTIFIED,     MIS_TEXT
+    MENUITEM    "~Right justified",         ID_SBRIGHTJUSTIFIED,    MIS_TEXT
+END
+
+MENU        ID_OVCLIENTMENU
+BEGIN
+    SUBMENU     "~SmartIcons",              ID_OVSUBMENUICONS
+    BEGIN
+        MENUITEM    "~Exit",                ID_OVICONEXIT,          MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~Move",                ID_OVICONMOVE,          MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~Hide",                ID_OVICONHIDE,          MIS_TEXT, MIA_CHECKED
+        MENUITEM    "Z-Order ~Top",         ID_OVICONZORDERTOP,     MIS_TEXT, MIA_CHECKED
+        MENUITEM    "Z-Order ~Bottom",      ID_OVICONZORDERBOTTOM,  MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~Close",               ID_OVICONCLOSE,         MIS_TEXT, MIA_CHECKED
+        MENUITEM    "M~aximize",            ID_OVICONMAXIMIZE,      MIS_TEXT, MIA_CHECKED
+        MENUITEM    "M~inimize",            ID_OVICONMINIMIZE,      MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~Restore",             ID_OVICONRESTORE,       MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~ShutDown",            ID_OVICONSHUTDOWN,      MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~PowerDown",           ID_OVICONPOWERDOWN,     MIS_TEXT, MIA_CHECKED
+        MENUITEM    "~Lockup",              ID_OVICONLOCKUP,        MIS_TEXT, MIA_CHECKED
+        MENUITEM    "H~elp",                ID_OVICONHELP,          MIS_TEXT, MIA_CHECKED
+    END
+    SUBMENU     "~Debug",                   ID_OVSUBMENUDEBUG,
+    BEGIN
+        MENUITEM    "~Dump PC/2 process",   ID_OVDUMPPROCESS,       MIS_TEXT
+        MENUITEM    "Dump ~W-Thread",       ID_OVDUMPWTRD,          MIS_TEXT
+        MENUITEM    "Dump ~I-Thread",       ID_OVDUMPITRD,          MIS_TEXT
+        MENUITEM    "Dump ~N-Thread",       ID_OVDUMPNTRD,          MIS_TEXT
+    END
+END
+
+ACCELTABLE  ID_PC2MAINWINDOW    PRELOAD
+BEGIN
+    VK_F3,                                  ID_EXIT, VIRTUALKEY
+    VK_F3,                                  ID_BREAKPOINT, VIRTUALKEY, ALT, CONTROL, SHIFT
+    VK_END,                                 ID_EMERGENCYEXIT, VIRTUALKEY, ALT, CONTROL, SHIFT
+    VK_SYSRQ,                               ID_DEBUG, VIRTUALKEY, ALT
+    VK_SYSRQ,                               ID_UNHANG, VIRTUALKEY, CONTROL
+END
+
